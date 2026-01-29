@@ -1,0 +1,2748 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grandes Heróis | Camporí DSA 2027</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-black: #050505;
+            --bg-card: #121212;
+            --bg-card-hover: #1a1a1a;
+            --primary-green: #4CAF50;
+            --dark-green: #388E3C;
+            --accent-yellow: #FBC02D;
+            --gold: #C9A227;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --border-color: #222;
+            --cream: #F5F3EE;
+            --white: #FFFFFF;
+            --green-dark: #1a3518;
+            --dark-gray: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 60px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-logo span {
+            color: var(--text-main);
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--accent-yellow);
+            color: var(--bg-black);
+            padding: 12px 28px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(251, 192, 45, 0.3);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; /* Empilha o Wrapper e o Contador */
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-black);
+            position: relative;
+            overflow: hidden;
+            padding-top: 100px; /* Espaço para o menu fixo não cobrir */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(76, 175, 80, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(251, 192, 45, 0.06) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .hero-wrapper {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            padding: 0 60px;
+            margin-bottom: 40px;
+            z-index: 2;
+            gap: 40px;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(251, 192, 45, 0.15);
+            border: 1px solid var(--accent-yellow);
+            padding: 10px 20px;
+            margin-bottom: 30px;
+            width: fit-content;
+        }
+
+        .hero-badge span {
+            color: var(--accent-yellow);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            color: var(--text-main);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 25px;
+            max-width: 600px;
+            line-height: 1.2;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent-yellow);
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .hero-description {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        /* Configuração da Imagem */
+        .hero-image {
+            position: relative;
+            overflow: hidden;
+            height: 400px; /* Altura fixa para manter o estilo panorâmico */
+            width: 100%;
+            border-radius: 20px 0 0 20px; /* Arredondado na esquerda */
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-img-real {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Configuração do Contador (agora centralizado embaixo) */
+        .hero-countdown {
+            background: rgba(18, 18, 18, 0.8);
+            border: 2px solid var(--primary-green);
+            padding: 20px 40px;
+            max-width: 600px;
+            box-shadow: 0 0 30px rgba(76, 175, 80, 0.2);
+            z-index: 2;
+            width: 90%; /* Para não colar na borda em celular */
+            border-radius: 10px;
+            /* Centraliza o próprio box */
+            margin: 0 auto 40px auto; 
+        }
+
+        .countdown-label {
+            color: var(--accent-yellow);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-green);
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .countdown-unit {
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        /* Ajuste Responsivo para Mobile */
+        @media (max-width: 992px) {
+            .hero {
+                padding-top: 120px;
+                display: block; /* Remove o flex center vertical */
+            }
+            .hero-wrapper {
+                grid-template-columns: 1fr; /* Um embaixo do outro */
+                padding: 0 20px;
+                gap: 30px;
+            }
+            .hero-content {
+                text-align: center;
+                align-items: center;
+            }
+            .hero-description {
+                margin: 0 auto; /* Centraliza texto */
+            }
+            .hero-image {
+                border-radius: 10px; /* Borda normal no mobile */
+                height: 300px;
+            }
+            .hero-countdown {
+                margin: 30px auto;
+            }
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .hero-image-placeholder svg {
+            width: 80px;
+            height: 80px;
+            stroke: var(--accent-yellow);
+            stroke-width: 1.5;
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+
+        .hero-image-placeholder span {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* ========== PROGRESS SECTION ========== */
+        .progress-section {
+            background: var(--bg-card);
+            padding: 100px 20px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .progress-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .progress-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .progress-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .progress-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 30px;
+            background: var(--bg-black);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 30px rgba(76, 175, 80, 0.2);
+        }
+
+        .stat-box.highlight {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--primary-green);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-yellow);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            margin-bottom: 50px;
+        }
+
+        .progress-bar-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar-labels span {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .progress-bar-labels .current {
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        .progress-bar-bg {
+            height: 25px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-yellow));
+            border-radius: 15px;
+            width: 0%;
+            transition: width 2s ease-out;
+            position: relative;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Avatars Grid */
+        .avatars-section {
+            text-align: center;
+        }
+
+        .avatars-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .avatars-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto 25px;
+        }
+
+        .avatar-item {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            cursor: default;
+            border: 2px solid transparent;
+        }
+
+        .avatar-item.confirmed {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            border-color: var(--primary-green);
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
+            color: white;
+        }
+
+        .avatar-item.pending {
+            background: rgba(42, 42, 42, 0.8);
+            border-color: #444;
+            color: var(--text-muted);
+        }
+
+        .avatar-item:hover {
+            transform: scale(1.15);
+        }
+
+        .avatars-legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+
+        .legend-dot.green {
+            background: var(--primary-green);
+        }
+
+        .legend-dot.gray {
+            background: #444;
+        }
+
+        /* ========== SECTIONS COMUM ========== */
+        section {
+            padding: 100px 20px;
+        }
+
+        .section-header {
+            max-width: 600px;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            color: var(--accent-yellow);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about {
+            background: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+            margin-top: 50px;  
+        }
+
+        .about-header {
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .about-image {
+            position: relative;
+            width: 100%;
+            /* Garante que o elemento decorativo fique atrás */
+            z-index: 1; 
+        }
+
+        /* NOVO: Elemento decorativo verde atrás das fotos */
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;     /* Desloca um pouco para cima */
+            left: -20px;    /* Desloca um pouco para a esquerda */
+            width: 90%;     /* Não ocupa a largura total para dar um charme */
+            height: 90%;
+            background: var(--primary-green); /* Cor do tema */
+            opacity: 0.15;  /* Bem clarinho para não brigar com a foto */
+            border-radius: 15px;
+            z-index: -1;    /* Fica atrás de tudo */
+        }
+
+        .about-image-main {
+            width: 100%;
+            aspect-ratio: 4/5;
+            /* background: var(--bg-card); <-- REMOVIDO (não precisa mais) */
+            border-radius: 15px; /* Aumentei um pouco o arredondado */
+            overflow: hidden;
+            /* border: 1px solid rgba(0,0,0,0.1); <-- REMOVIDO A BORDA! */
+            
+            /* NOVO: Sombra suave para destacar do fundo branco */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+        }
+
+        .about-image-secondary {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 180px;
+            height: 180px;
+            border-radius: 15px;
+            overflow: hidden;
+            /* Borda branca grossa para separar da imagem de trás */
+            border: 5px solid var(--white); 
+            /* Sombra mais forte para parecer que está flutuando na frente */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        /* Classe para as fotos reais preencherem o espaço */
+        .img-full {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease; /* Prepara para um efeito hover suave */
+        }
+
+        /* Efeito extra: leve zoom ao passar o mouse na imagem principal */
+        .about-image-main:hover .img-full {
+            transform: scale(1.05);
+        }
+
+        .about-header .section-label {
+            color: var(--primary-green); 
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .about-header .section-title {
+            color: var(--bg-black) !important;
+            font-size: 2.5rem;
+            max-width: 800px;
+            line-height: 1.2;
+        }
+        
+        @media (max-width: 992px) {
+            .about-header .section-title {
+                font-size: 2rem;
+            }
+            .about-grid {
+                margin-top: 30px;
+                gap: 40px;
+            }
+        }
+
+        .about .section-title {
+            color: var(--bg-card) !important; 
+            word-break: keep-all; 
+            overflow-wrap: normal;
+        }
+
+        .about .info-content strong {
+            color: var(--bg-card) !important;
+        }
+
+        .about .info-icon {
+            stroke: var(--primary-green);
+        }
+
+        .about .about-text,
+        .about .info-content span {
+            color: var(--dark-gray);
+        }
+
+        .image-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .img-full {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-placeholder svg {
+            width: 50px;
+            height: 50px;
+            stroke: var(--text-muted);
+            stroke-width: 1.5;
+        }
+
+        .image-placeholder span {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .about-text {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 25px;
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 40px;
+        }
+
+        .info-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-icon {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary-green);
+            stroke-width: 2;
+            flex-shrink: 0;
+        }
+
+        .info-content strong {
+            display: block;
+            color: var(--text-main);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .info-content span {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ========== ACTIVITIES SECTION  ========== */
+        .activities {
+            background: var(--cream);
+            /* REMOVIDO: border-top: 1px solid var(--border-color); */
+            border-top: none; /* Remove a linha preta */
+            position: relative;
+        }
+
+        /* AJUSTE DE CORES DO CABEÇALHO (Para fundo claro) */
+        .activities .section-title {
+            color: var(--bg-black); /* Título preto para contraste */
+        }
+
+        .activities .section-subtitle {
+            color: var(--dark-gray); /* Subtítulo cinza escuro */
+        }
+
+        .activities .section-label {
+            color: var(--primary-green); /* Verde fica melhor que amarelo no fundo creme */
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .activity-card {
+            background: var(--white); /* Mudei os cards para BRANCO para ficar mais limpo */
+            border: 1px solid rgba(0,0,0,0.05); /* Borda super sutil */
+            border-radius: 15px; /* Arredondado para combinar com o resto */
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: var(--primary-green);
+        }
+
+        .activity-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: var(--bg-card);
+            
+            /* CORREÇÃO: Adicionamos isso para o fundo não 'vazar' */
+            position: relative;
+            overflow: hidden; 
+            /* Arredonda apenas em cima (pois o card é arredondado) */
+            /* Isso garante que a imagem de fundo respeite a curva */
+            border-radius: 15px 15px 0 0; 
+        }
+
+        .activity-content {
+            padding: 30px;
+        }
+
+        /* Ajuste de cor dos textos DENTRO dos cards (agora que o card é branco) */
+        .activity-content h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--bg-black); /* Título do card preto */
+        }
+
+        .activity-content p {
+            color: var(--dark-gray); /* Texto do card cinza escuro */
+            font-size: 0.95rem;
+            text-align: justify; /* Mantendo seu padrão justificado */
+            hyphens: none;
+        }
+
+        /* ========== SLIDER DE IMAGENS ========== */
+        .slider-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Garante que a foto cubra tudo sem distorcer */
+            transition: opacity 0.8s ease-in-out; /* Tempo do "fade" */
+            opacity: 1;
+        }
+
+        /* Classe que o Javascript vai usar para esconder a imagem durante a troca */
+        .slider-img.fade-out {
+            opacity: 0;
+        }
+
+        /* ========== CAMPORI SECTION ========== */
+        .campori {
+            background: var(--bg-black);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .campori-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .campori-date {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 50px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .date-box {
+            background: var(--accent-yellow);
+            color: var(--bg-black);
+            padding: 25px 30px;
+            text-align: center;
+        }
+
+        .date-box .day {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+            display: block;
+        }
+
+        .date-box .month {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .date-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .date-info p {
+            color: var(--text-muted);
+        }
+
+        .budget-list {
+            list-style: none;
+        }
+
+        .budget-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .budget-item:last-child {
+            border-bottom: none;
+        }
+
+        .budget-item span:first-child {
+            color: var(--text-muted);
+        }
+
+        .budget-item span:last-child {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* ========== CAMPORI IMAGES (ESTILO NOVO) ========== */
+        .campori-image {
+            position: relative;
+            z-index: 1; /* Garante que a decoração fique atrás */
+        }
+
+        /* O elemento verde decorativo atrás da foto */
+        .campori-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;   /* Deslocado para a direita para equilibrar */
+            width: 90%;
+            height: 90%;
+            background: var(--primary-green);
+            opacity: 0.15;
+            border-radius: 15px;
+            z-index: -1;
+        }
+
+        .campori-image-main {
+            width: 100%;
+            aspect-ratio: 3/4;
+            /* Removemos background e bordas antigas */
+            border-radius: 15px;
+            overflow: hidden;
+            /* Sombra para destacar do fundo preto */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+        }
+
+        /* O selo com o número de desbravadores */
+        .campori-image-badge {
+            position: absolute;
+            bottom: 30px;
+            left: -30px;
+            background: var(--primary-green);
+            padding: 25px 35px;
+            border-radius: 15px;
+            
+            /* Sombra para dar profundidade */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            
+            /* TRUQUE: Borda da mesma cor do fundo da seção (preto) 
+               para parecer que o selo está "recortado" da foto */
+            border: 5px solid var(--bg-black); 
+            z-index: 2;
+        }
+
+        .campori-image-badge span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--text-main);
+        }
+
+        .campori-image-badge small {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            color: var(--text-main);
+        }
+
+        /* ========== SPONSORSHIP SECTION ========== */
+        .sponsorship {
+            background: var(--bg-card);
+            padding: 100px 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .sponsorship .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .tier-card {
+            background: var(--bg-black);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .tier-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-green);
+            border-radius: 15px 15px 0 0;
+        }
+
+        .tier-card:hover {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 40px rgba(76, 175, 80, 0.2);
+        }
+
+        .tier-card.featured {
+            background: linear-gradient(180deg, rgba(76, 175, 80, 0.15), var(--bg-black));
+            border-color: var(--primary-green);
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .tier-card.featured::before {
+            background: var(--accent-yellow);
+            height: 6px;
+        }
+
+        .tier-card.featured:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 50px rgba(251, 192, 45, 0.3);
+        }
+
+        .tier-card.super {
+            border-color: var(--accent-yellow);
+        }
+
+        .tier-card.super::before {
+            background: linear-gradient(90deg, var(--accent-yellow), var(--gold));
+        }
+
+        .badge-percent {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .tier-card.featured .badge-percent,
+        .tier-card.super .badge-percent {
+            color: var(--accent-yellow);
+            border: 1px solid var(--accent-yellow);
+        }
+
+        .tier-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .tier-card.featured .tier-icon,
+        .tier-card.super .tier-icon {
+            filter: drop-shadow(0 0 15px var(--accent-yellow));
+        }
+
+        .tier-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tier-card.featured .tier-name,
+        .tier-card.super .tier-name {
+            color: var(--accent-yellow);
+        }
+
+        .tier-price {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary-green);
+            margin: 15px 0;
+        }
+
+        .tier-price small {
+            font-size: 0.5em;
+            color: var(--text-muted);
+        }
+
+        .tier-card.featured .tier-price,
+        .tier-card.super .tier-price {
+            color: var(--accent-yellow);
+            text-shadow: 0 0 20px rgba(251, 192, 45, 0.5);
+        }
+
+        .tier-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            min-height: 70px;
+        }
+
+        .tier-installment {
+            color: var(--primary-green);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: -5px 0 15px 0;
+            opacity: 0.9;
+        }
+
+        .tier-card.featured .tier-installment,
+        .tier-card.super .tier-installment {
+            color: var(--accent-yellow);
+        }
+
+        .btn-tier {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .btn-tier:hover {
+            background: var(--primary-green);
+            box-shadow: 0 0 25px rgba(76, 175, 80, 0.5);
+        }
+
+        .tier-card.featured .btn-tier {
+            background: var(--accent-yellow);
+            border-color: var(--accent-yellow);
+            color: var(--bg-black);
+        }
+
+        .tier-card.featured .btn-tier:hover {
+            background: var(--gold);
+            box-shadow: 0 0 30px rgba(251, 192, 45, 0.5);
+        }
+
+        .tier-card.super .btn-tier {
+            border-color: var(--accent-yellow);
+            color: var(--accent-yellow);
+        }
+
+        .tier-card.super .btn-tier:hover {
+            background: var(--accent-yellow);
+            color: var(--bg-black);
+        }
+
+        /* Card Outro Valor - ocupa toda a largura no desktop */
+        .tier-card.other-value {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px 60px;
+            border-color: var(--primary-green);
+            border-style: dashed;
+            background: linear-gradient(90deg, rgba(76, 175, 80, 0.05), rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
+        }
+
+        .tier-card.other-value::before {
+            display: none;
+        }
+
+        .tier-card.other-value .tier-icon {
+            font-size: 3.5rem;
+            margin: 0;
+        }
+
+        .tier-card.other-value .other-value-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            flex: 1;
+        }
+
+        .tier-card.other-value .tier-name {
+            color: var(--primary-green);
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+
+        .tier-card.other-value .tier-desc {
+            margin-bottom: 0;
+            min-height: auto;
+            max-width: 500px;
+        }
+
+        .tier-card.other-value .badge-percent {
+            position: relative;
+            top: auto;
+            right: auto;
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .tier-card.other-value .btn-tier {
+            white-space: nowrap;
+            padding: 15px 40px;
+        }
+
+        @media (max-width: 992px) {
+            .tier-card.other-value {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+                padding: 30px;
+            }
+            
+            .tier-card.other-value .other-value-content {
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+        /* No mobile, other-value vira card normal ao lado do super padrinho */
+        @media (max-width: 768px) {
+            .tier-card.other-value {
+                grid-column: auto;
+                padding: 20px 15px;
+                gap: 10px;
+                background: var(--bg-black);
+            }
+            
+            .tier-card.other-value .tier-icon {
+                font-size: 2rem;
+            }
+            
+            .tier-card.other-value .tier-name {
+                font-size: 1.1rem;
+            }
+            
+            .tier-card.other-value .tier-desc {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+            
+            .tier-card.other-value .btn-tier {
+                padding: 10px 20px;
+                font-size: 0.75rem;
+            }
+            
+            .tier-card.other-value .badge-percent {
+                font-size: 0.65rem;
+                padding: 4px 8px;
+            }
+        }
+
+        /* ========== GALLERY SECTION ========== */
+        .gallery {
+            background: var(--white);
+            padding: 100px 20px;
+        }
+
+        .gallery .section-label {
+            color: var(--primary-green);
+        }
+
+        .gallery .section-title {
+            color: var(--bg-black);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 220px);
+            gap: 15px;
+        }
+
+        .gallery-item {
+            background: var(--cream);
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        /* ========== BOTÃO ENCONTRE UM CLUBE ========== */
+        .find-club-wrapper {
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1); /* Linha divisória suave */
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .find-club-wrapper p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .btn-find-club {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-green);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: rgba(76, 175, 80, 0.1); /* Fundo verde bem clarinho */
+            padding: 10px 20px;
+            border-radius: 50px; /* Botão arredondado */
+        }
+
+        .btn-find-club:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateX(5px); /* Move levemente para direita ao passar o mouse */
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        /* ========== DONATE SECTION ========== */
+        .donate {
+            background: var(--bg-black);
+            text-align: center;
+            padding: 100px 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .donate .section-label {
+            color: var(--accent-yellow);
+        }
+
+        .donate .section-title {
+            color: var(--text-main);
+        }
+
+        .donate .section-subtitle {
+            color: var(--text-muted);
+        }
+
+        .donate-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .donate-box {
+            background: var(--bg-card);
+            padding: 50px;
+            margin-top: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+        }
+
+        .donate-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .donate-box p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .btn-whatsapp-donate {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            padding: 18px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-whatsapp-donate:hover {
+            background: var(--dark-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-whatsapp-donate i {
+            font-size: 1.3rem;
+        }
+
+        .pix-box {
+            background: var(--bg-card);
+            padding: 50px;
+            margin-top: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+        }
+
+        .pix-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--text-main);
+        }
+
+        .pix-key {
+            background: var(--bg-black);
+            padding: 20px 40px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            display: inline-block;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            user-select: all;
+        }
+
+        .pix-name {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .copy-btn {
+            background: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+            padding: 15px 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 25px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--bg-black);
+            padding: 80px 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+
+        .footer-section h4 {
+            color: var(--accent-yellow);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a,
+        .footer-section ul li span {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-green);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 60px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* ========== HOVER EFFECT ON TEXT ========== */
+        .hover-letter {
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+
+        .hover-letter:hover {
+            color: var(--primary-green);
+            transform: translateY(-3px) scale(1.1);
+            text-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px currentColor; }
+            50% { box-shadow: 0 0 20px currentColor; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+        
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--text-main);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
+        @media (max-width: 1200px) {
+            .tiers-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .tier-card.featured {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 992px) {
+            section { padding: 80px 20px; }
+            nav { padding: 15px 30px; }
+            .hero { grid-template-columns: 1fr; }
+            .hero-content { padding: 140px 30px 60px; }
+            .hero-image { height: 350px; }
+            .about-grid, .campori-grid { grid-template-columns: 1fr; gap: 50px; }
+            .activities-grid { grid-template-columns: repeat(2, 1fr); }
+            .tiers-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .tier-card { padding: 25px 15px; }
+            .tier-card.featured { transform: none; }
+            .progress-stats { grid-template-columns: 1fr; gap: 20px; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 180px); }
+            .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+            .footer-content { grid-template-columns: 1fr; gap: 40px; }
+            .avatars-grid { grid-template-columns: repeat(8, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            /* Mobile Navigation */
+            .mobile-menu-btn { 
+                display: flex;
+                position: relative;
+                z-index: 1002;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(5, 5, 5, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                z-index: 1001;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-links.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .nav-links li {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.3s ease;
+            }
+            
+            .nav-links.active li {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
+            .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
+            .nav-links.active li:nth-child(4) { transition-delay: 0.4s; }
+            
+            .nav-links a {
+                font-size: 1.5rem;
+                padding: 10px 20px;
+            }
+            
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-cta {
+                padding: 10px 20px;
+                font-size: 0.75rem;
+            }
+            
+            /* Hero adjustments */
+            .hero h1 { font-size: 1.8rem; }
+            .hero-description { font-size: 1rem; }
+            .hero-wrapper { padding: 0 15px; }
+            .hero-image { height: 250px; }
+            
+            /* Countdown */
+            .countdown-timer { flex-wrap: wrap; gap: 10px; }
+            .countdown-item { min-width: 60px; padding: 10px 8px; }
+            .countdown-number { font-size: 1.8rem; }
+            .hero-countdown { padding: 15px 20px; }
+            
+            /* Tiers - 2 colunas compactas no mobile */
+            .tiers-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 12px;
+                max-width: 100%;
+            }
+            .tier-card {
+                padding: 20px 15px;
+            }
+            .tier-card.featured {
+                transform: none;
+            }
+            .tier-desc {
+                min-height: auto;
+                font-size: 0.8rem;
+                line-height: 1.4;
+                margin-bottom: 15px;
+            }
+            .tier-price {
+                font-size: 1.5rem;
+                margin: 10px 0;
+            }
+            .tier-icon {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+            .tier-name {
+                font-size: 1.1rem;
+            }
+            .tier-installment {
+                font-size: 0.75rem;
+                margin: -3px 0 10px 0;
+            }
+            .btn-tier {
+                padding: 10px 20px;
+                font-size: 0.75rem;
+            }
+            .badge-percent {
+                font-size: 0.65rem;
+                padding: 4px 8px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            /* Activities */
+            .activities-grid { grid-template-columns: 1fr; }
+            
+            /* Gallery */
+            .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .gallery-item:nth-child(1) { grid-column: span 1; }
+            
+            /* Stats */
+            .stat-value { font-size: 2rem; }
+            .stat-box { padding: 20px; }
+            
+            /* About - imagem secundária sobreposta também no mobile */
+            .about-image-secondary { 
+                position: absolute; 
+                bottom: -20px; 
+                right: -10px; 
+                width: 120px; 
+                height: 120px; 
+                margin-top: 0;
+                border: 4px solid var(--white);
+            }
+            
+            /* Avatars - grid compacto com quadradinhos menores */
+            .avatars-grid { 
+                grid-template-columns: repeat(10, 1fr); 
+                gap: 5px;
+                max-width: 100%;
+            }
+            .avatar-item { 
+                font-size: 0.7rem;
+                border-radius: 4px;
+            }
+            .avatars-legend { flex-direction: row; gap: 20px; font-size: 0.8rem; }
+            .avatars-title { font-size: 1.2rem; }
+            
+            /* Footer */
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+            
+            /* Section headers */
+            .section-title { font-size: 1.8rem; }
+            .section-header { margin-bottom: 40px; }
+            
+            /* Campori section - tudo alinhado à esquerda */
+            .campori-details {
+                text-align: left;
+            }
+            .campori-details .section-label,
+            .campori-details .section-title {
+                text-align: left;
+            }
+            .campori-date { 
+                flex-direction: row; 
+                gap: 15px;
+                justify-content: flex-start;
+            }
+            .date-box { 
+                padding: 15px 20px;
+                flex-shrink: 0;
+            }
+            .date-box .day {
+                font-size: 2rem;
+            }
+            .date-info {
+                text-align: left;
+            }
+            .date-info h3 {
+                font-size: 1.2rem;
+            }
+            .date-info p {
+                font-size: 0.9rem;
+            }
+            .budget-list { font-size: 0.9rem; }
+            
+            /* Campori image badge no mobile */
+            .campori-image-badge {
+                left: -15px;
+                bottom: 20px;
+                padding: 15px 20px;
+            }
+            .campori-image-badge span {
+                font-size: 1.8rem;
+            }
+            .campori-image-badge small {
+                font-size: 0.7rem;
+            }
+            
+            /* PIX box */
+            .pix-box { padding: 30px 20px; }
+            .pix-key { 
+                padding: 15px 20px; 
+                font-size: 0.9rem;
+                word-break: break-all;
+            }
+            
+            /* Progress section */
+            .progress-header h2 { font-size: 1.8rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.5rem; }
+            .hero-badge span { font-size: 0.7rem; }
+            .countdown-item { min-width: 55px; }
+            .countdown-number { font-size: 1.5rem; }
+            
+            /* Avatars ainda mais compactos */
+            .avatars-grid { 
+                grid-template-columns: repeat(8, 1fr); 
+                gap: 4px;
+            }
+            .avatar-item { 
+                font-size: 0.6rem;
+                border-radius: 3px;
+            }
+            
+            /* Tiers ainda em 2 colunas mas mais compactos */
+            .tier-card {
+                padding: 15px 12px;
+            }
+            .tier-price { font-size: 1.3rem; }
+            .tier-icon { font-size: 1.8rem; }
+            .tier-name { font-size: 1rem; }
+            .tier-desc { font-size: 0.75rem; }
+            .btn-tier { padding: 8px 15px; font-size: 0.7rem; }
+            
+            .section-title { font-size: 1.5rem; }
+            .nav-logo span { font-size: 1rem; }
+            .nav-logo img { height: 40px; }
+            
+            /* About secondary image */
+            .about-image-secondary { 
+                width: 100px; 
+                height: 100px;
+                bottom: -15px;
+                right: -5px;
+            }
+        }
+
+        .hero-description,      /* Texto do Hero */
+        .about-text,            /* Texto do Sobre */
+        .section-subtitle,      /* Subtítulos das seções */
+        .activity-content p,    /* Texto dos cards de atividade */
+        .tier-desc,             /* Descrição dos níveis de apadrinhamento */
+        .footer-brand p {       /* Texto do rodapé */
+            text-align: justify;
+            
+            /* Dica extra: hifens automáticos ajudam a evitar 
+               buracos grandes entre as palavras quando se usa justify */
+            hyphens: none;
+            -webkit-hyphens: none; 
+            -ms-hyphens: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Canvas para trilha do cursor -->
+    <canvas id="trailCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-logo">
+            <img src="pics/logo.png" alt="Grandes Heróis" onerror="this.style.display='none'">
+            <span>Grandes Heróis</span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#atividades">Atividades</a></li>
+            <li><a href="#campori">Camporí</a></li>
+            <li><a href="#doar">Doar Agora</a></li>
+        </ul>
+        <a href="#apadrinhe" class="nav-cta">Apadrinhe</a>
+        <div class="mobile-menu-btn" id="mobileMenuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+<section class="hero">
+        
+        <div class="hero-wrapper">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>Camporí DSA 2027 • Barretos, SP</span>
+                </div>
+                <h1>Ajude nossos <span class="highlight hover-text">Grandes Heróis</span> a realizarem esse sonho</h1>
+                <p class="hero-description">O Clube de Desbravadores Grandes Heróis está se preparando para participar do maior evento de desbravadores da HISTÓRIA, que acontece a cada 10 ANOS. Sua contribuição transforma sonhos em realidade.</p>
+            </div>
+            
+            <div class="hero-image">
+                <img src="pics/clube_todo.jpg" alt="Clube Grandes Heróis" class="hero-img-real">
+            </div>
+        </div>
+
+        <div class="hero-countdown">
+            <p class="countdown-label">O Camporí começa em</p>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">000</span>
+                    <span class="countdown-unit">Dias</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-unit">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-unit">Min</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-unit">Seg</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Progress Section -->
+    <section class="progress-section" id="progresso">
+        <div class="progress-container">
+            <div class="progress-header">
+                <h2 class="hover-text">Juntos, Estamos Transformando Sonhos</h2>
+                <p>Acompanhe nosso progresso em tempo real</p>
+            </div>
+
+            <div class="progress-stats">
+                <div class="stat-box">
+                    <span class="stat-value" id="arrecadado-display">R$ 0</span>
+                    <span class="stat-label">Já Arrecadado</span>
+                </div>
+                <div class="stat-box highlight">
+                    <span class="stat-value" id="confirmados-display">0</span>
+                    <span class="stat-label">Viagens Garantidas</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">R$ 80.065</span>
+                    <span class="stat-label">Nossa Meta</span>
+                </div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar-labels">
+                    <span class="current">R$ <span id="bar-current">0</span></span>
+                    <span><span id="bar-percent">0</span>% da meta</span>
+                    <span>R$ 80.065</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+            </div>
+
+            <div class="avatars-section">
+                <h3 class="avatars-title hover-text">40 Desbravadores Sonhando com Barretos</h3>
+                <div class="avatars-grid" id="avatarsGrid"></div>
+                <div class="avatars-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot green"></div>
+                        <span>Viagem garantida</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot gray"></div>
+                        <span>Ainda precisa de ajuda</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="sobre">
+        <div class="container">
+            
+            <div class="about-header">
+                <span class="section-label">Quem Somos</span>
+                <h2 class="section-title hover-text">Há 10 anos formando Grandes Heróis</h2>
+            </div>
+
+            <div class="about-grid">
+                
+                <div class="about-image">
+                    <div class="about-image-main">
+                        <img src="pics/ordem_unida.jpg" alt="Foto principal do clube" class="img-full">
+                    </div>
+
+                    <div class="about-image-secondary">
+                        <img src="pics/bandeiras.jpg" alt="Detalhe do clube" class="img-full">
+                    </div>
+                </div> <div class="about-content">
+                    <p class="about-text">O clube de desbravadores é um projeto <strong>100% voluntário</strong> da Igreja Adventista, dedicado a transformar a vida de crianças e adolescentes. Desde 2016, oferecemos um programa completo de aventura, cidadania e crescimento espiritual, sem fins lucrativos.</p>
+                    
+                    <p class="about-text">Nosso propósito é oferecer uma alternativa real à ociosidade do mundo, com atividades que edificam e protegem. Para muitos de nossos desbravadores, o clube é a <strong>única oportunidade</strong> de conviver em um ambiente seguro e saudável, onde encontram mentoria, amizade e a chance de construir um futuro diferente.</p>
+                    
+                    <ul class="info-list">
+                        <li>
+                            <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                            </svg>
+                            <div class="info-content">
+                                <strong>Local das Reuniões</strong>
+                                <span>Igreja Adventista de Ponte Alta Norte / Brasília - DF</span>
+                            </div>
+                        </li>
+                        <li>
+                            <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <div class="info-content">
+                                <strong>Horário</strong>
+                                <span>Sábados, das 16h30 às 19h30</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="find-club-wrapper">
+                        <p>Mora longe?</p>
+                        <a href="https://clubes.adventistas.org/br/" target="_blank" class="btn-find-club">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Encontre o clube mais perto de você
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section class="activities" id="atividades">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">O Que Fazemos</span>
+                <h2 class="section-title hover-text">Atividades que transformam</h2>
+                <p class="section-subtitle">Nosso programa oferece experiências únicas que desenvolvem habilidades para a vida toda.</p>
+            </div>
+            
+            <div class="activities-grid">
+                
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="pics/acamp/foto1.jpg" id="slide-acampamento" class="slider-img" alt="Acampamento">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Acampamentos</h3>
+                        <p>Experiências na natureza que desenvolvem autonomia, trabalho em equipe e conexão com o Criador.</p>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-image">
+                         <img src="pics/espec/foto1.jpg" id="slide-especialidades" class="slider-img" alt="Especialidades">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Especialidades</h3>
+                        <p>Mais de 400 habilidades para aprender, desde primeiros socorros até astronomia e culinária.</p>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-image">
+                         <img src="pics/servico/foto1.jpg" id="slide-comunitario" class="slider-img" alt="Serviço Comunitário">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Serviço Comunitário</h3>
+                        <p>Projetos que impactam nossa comunidade e ensinam o valor de servir ao próximo.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Campori Section -->
+    <section class="campori" id="campori">
+        <div class="container">
+            <div class="campori-grid">
+                <div class="campori-details">
+                    <span class="section-label">O Grande Evento</span>
+                    <h2 class="section-title hover-text">Camporí DSA 2027</h2>
+                    
+                    <div class="campori-date">
+                        <div class="date-box">
+                            <span class="day">05</span>
+                            <span class="month">Janeiro</span>
+                        </div>
+                        <div class="date-info">
+                            <h3>Barretos, São Paulo</h3>
+                            <p>O maior encontro de desbravadores da HISTÓRIA</p>
+                        </div>
+                    </div>
+                    
+                    <ul class="budget-list">
+                        <li class="budget-item">
+                            <span>Transporte (ônibus fretado)</span>
+                            <span>R$ 22.000</span>
+                        </li>
+                        <li class="budget-item">
+                            <span>Inscrições e Alimentação</span>
+                            <span>R$ 33.160</span>
+                        </li>
+                        <li class="budget-item">
+                            <span>Equipamentos e Uniformes</span>
+                            <span>R$ 20.905</span>
+                        </li>
+                        <li class="budget-item">
+                            <span>Acampamento e Eventos</span>
+                            <span>R$ 4.000</span>
+                        </li>
+                        <li class="budget-item" style="border-top: 2px solid var(--accent-yellow); padding-top: 25px; margin-top: 10px;">
+                            <span style="color: var(--accent-yellow); font-weight: 700;">Total Necessário</span>
+                            <span style="color: var(--accent-yellow); font-size: 1.3em; font-weight: 700;">R$ 80.065</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="campori-image">
+                    <div class="campori-image-main">
+                    <img src="pics/campori/foto1.jpg" id="slide-campori" class="slider-img" alt="Camporí">
+                </div>
+                    <div class="campori-image-badge">
+                        <span>40</span>
+                        <small>Desbravadores Sonhando</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsorship Section -->
+    <section class="sponsorship" id="apadrinhe">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Faça Parte</span>
+                <h2 class="section-title hover-text">Seja um Padrinho</h2>
+                <p class="section-subtitle">Escolha como deseja contribuir para realizar o sonho dos nossos desbravadores. Cada contribuição faz a diferença.</p>
+            </div>
+            
+            <div class="tiers-grid">
+                <div class="tier-card">
+                    <div class="badge-percent">25%</div>
+                    <span class="tier-icon">💚</span>
+                    <h3 class="tier-name">Amigo</h3>
+                    <div class="tier-price"><small>R$</small> 500</div>
+                    <p class="tier-installment">ou 5x de R$ 100</p>
+                    <p class="tier-desc">Toda ajuda é bem-vinda! Seu apoio faz parte de uma corrente de solidariedade.</p>
+                    <a href="https://wa.me/5561999933816?text=Ol%C3%A1!%20Gostaria%20de%20ajudar%20o%20clube%20com%20a%20cota%20AMIGO%20(R$%20500)." target="_blank" class="btn-tier">Apoiar</a>
+                </div>
+
+                <div class="tier-card">
+                    <div class="badge-percent">50%</div>
+                    <span class="tier-icon">🤝</span>
+                    <h3 class="tier-name">Companheiro</h3>
+                    <div class="tier-price"><small>R$</small> 1.000</div>
+                    <p class="tier-installment">ou 10x de R$ 100</p>
+                    <p class="tier-desc">Contribua com metade do necessário e seja um parceiro essencial nesta jornada.</p>
+                    <a href="https://wa.me/5561999933816?text=Ol%C3%A1!%20Quero%20ajudar%20o%20clube%20com%20a%20cota%20de%20COMPANHEIRO%20(R$%201.000)." target="_blank" class="btn-tier">Apoiar</a>
+                </div>
+
+                <div class="tier-card">
+                    <div class="badge-percent">75%</div>
+                    <span class="tier-icon">⭐</span>
+                    <h3 class="tier-name">Colaborador</h3>
+                    <div class="tier-price"><small>R$</small> 1.500</div>
+                    <p class="tier-installment">ou 10x de R$ 150</p>
+                    <p class="tier-desc">Uma contribuição significativa que cobre a maior parte das necessidades.</p>
+                    <a href="https://wa.me/5561999933816?text=Ol%C3%A1!%20Quero%20ser%20um%20COLABORADOR%20e%20fazer%20minha%20doa%C3%A7%C3%A3o%20de%20R$%201.500." target="_blank" class="btn-tier">Apoiar</a>
+                </div>
+
+                <div class="tier-card featured">
+                    <div class="badge-percent">100%</div>
+                    <span class="tier-icon">🏆</span>
+                    <h3 class="tier-name">Padrinho</h3>
+                    <div class="tier-price"><small>R$</small> 2.000</div>
+                    <p class="tier-installment">ou 10x de R$ 200</p>
+                    <p class="tier-desc">Patrocine integralmente um desbravador: transporte, inscrição, alimentação e uniformes.</p>
+                    <a href="https://wa.me/5561999933816?text=Ol%C3%A1!%20Decidi%20APADRINHAR%20um%20desbravador%20e%20garantir%20a%20ida%20dele%20para%20o%20Campor%C3%AD%20(R$%202.000)." target="_blank" class="btn-tier">Apadrinhar</a>
+                </div>
+
+                <div class="tier-card super">
+                    <div class="badge-percent">HERO</div>
+                    <span class="tier-icon">👑</span>
+                    <h3 class="tier-name">Super Padrinho</h3>
+                    <div class="tier-price"><small>R$</small> 2k+</div>
+                    <p class="tier-installment">parcelamos para você!</p>
+                    <p class="tier-desc">Apadrinhe mais de um desbravador e seja um verdadeiro herói!</p>
+                    <a href="https://wa.me/5561999933816?text=Ol%C3%A1!%20Quero%20ser%20um%20SUPER%20PADRINHO%20e%20ajudar%20a%20levar%20mais%20de%20um%20desbravador%20para%20o%20Campor%C3%AD." target="_blank" class="btn-tier">Ser Herói</a>
+                </div>
+
+                <div class="tier-card other-value">
+                    <span class="tier-icon">💝</span>
+                    <div class="other-value-content">
+                        <div class="badge-percent">LIVRE</div>
+                        <h3 class="tier-name">Quer contribuir com outro valor?</h3>
+                        <p class="tier-desc">Toda ajuda é bem-vinda! Contribua com o valor que puder e faça parte dessa corrente de solidariedade. Entre em contato conosco pelo WhatsApp.</p>
+                    </div>
+                    <a href="https://wa.me/5561999933816?text=Ol%C3%A1!%20Quero%20contribuir%20com%20o%20sonho%20do%20Campor%C3%AD.%20Como%20fa%C3%A7o%20minha%20doa%C3%A7%C3%A3o?" target="_blank" class="btn-tier">Falar no WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Galeria</span>
+                <h2 class="section-title hover-text">Momentos que marcam</h2>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="pics/galeria/foto1.jpg" alt="Momento especial 1"></div>
+                <div class="gallery-item"><img src="pics/galeria/foto2.jpeg" alt="Momento especial 2"></div>
+                <div class="gallery-item"><img src="pics/galeria/foto3.jpeg" alt="Momento especial 3"></div>
+                <div class="gallery-item"><img src="pics/galeria/foto4.jpeg" alt="Momento especial 4"></div>
+                <div class="gallery-item"><img src="pics/galeria/foto5.jpg" alt="Momento especial 5"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donate Section -->
+    <section class="donate" id="doar">
+        <div class="donate-content">
+            <span class="section-label">Contribua</span>
+            <h2 class="section-title hover-text">Faça sua doação</h2>
+            <p class="section-subtitle">Sua contribuição, seja ela de qualquer valor, faz a diferença na vida desses jovens.</p>
+            
+            <div class="donate-box">
+                <h3>Quer doar um valor diferente?</h3>
+                <p>Clique no botão abaixo para conversar diretamente conosco pelo WhatsApp e combinar sua contribuição.</p>
+                <a href="https://wa.me/5561999933816?text=Olá!%20Quero%20fazer%20uma%20doação%20para%20o%20Camporí%20DSA%202027%20do%20Clube%20Grandes%20Heróis!" target="_blank" class="btn-whatsapp-donate">
+                    <i class="fab fa-whatsapp"></i>
+                    Doar pelo WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="nav-logo">
+                    <img src="logo-grandes-herois.png" alt="Grandes Heróis" onerror="this.style.display='none'">
+                    <span>Grandes Heróis</span>
+                </div>
+                <p>Clube de Desbravadores filiado à Igreja Adventista do Sétimo Dia. Formando jovens de caráter desde 2016.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul>
+                    <li><span>gheroisaplac@gmail.com</span></li>
+                    <li><span>(61) 9 9993-3816</span></li>
+                    <li><span>Brasília, DF</span></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="#sobre">Sobre o Clube</a></li>
+                    <li><a href="#atividades">Atividades</a></li>
+                    <li><a href="#campori">Camporí 2027</a></li>
+                    <li><a href="#apadrinhe">Seja um Padrinho</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2026 Clube de Desbravadores Grandes Heróis. Todos os direitos reservados.</p>
+            <p>Filiado à Igreja Adventista do Sétimo Dia</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // ============================================
+        // CONFIGURAÇÕES EDITÁVEIS
+        // ============================================
+        const CONFIG = {
+            camporiDate: new Date('2027-01-05T00:00:00'),
+            arrecadado: 3848,
+            metaTotal: 80065,
+            totalDesbravadores: 40,
+            custoPorDesbravador: 2000
+        };
+
+        // ============================================
+        // TRILHA DO CURSOR (CANVAS)
+        // ============================================
+        const canvas = document.getElementById('trailCanvas');
+        canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
+        const ctx = canvas.getContext('2d');
+        let trail = [];
+        let mouse = { x: 0, y: 0 };
+        const maxTrailLength = 30;
+        let lastMouseMove = Date.now();
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            lastMouseMove = Date.now();
+            
+            trail.push({ x: mouse.x, y: mouse.y });
+            if (trail.length > maxTrailLength) trail.shift();
+        });
+
+        function animateTrail() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Limpar trilha gradualmente quando mouse para
+            if (Date.now() - lastMouseMove > 200 && trail.length > 0) {
+                trail.shift();
+            }
+
+            if (trail.length > 1) {
+                for (let i = 1; i < trail.length; i++) {
+                    const point = trail[i];
+                    const prevPoint = trail[i - 1];
+                    const progress = i / trail.length;
+                    const alpha = progress * 0.8;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(prevPoint.x, prevPoint.y);
+                    ctx.lineTo(point.x, point.y);
+                    
+                    const color = progress > 0.5 ? `rgba(251, 192, 45, ${alpha})` : `rgba(76, 175, 80, ${alpha})`;
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 2 * progress;
+                    ctx.lineCap = 'round';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = color;
+                    ctx.stroke();
+                }
+            }
+            requestAnimationFrame(animateTrail);
+        }
+        animateTrail();
+
+        // ============================================
+        // EFEITO HOVER NAS LETRAS DOS TÍTULOS
+        // ============================================
+        function wrapLetters() {
+            document.querySelectorAll('.hover-text').forEach(element => {
+                const text = element.textContent; // Pega o texto original
+                element.innerHTML = ''; // Limpa o elemento
+                
+                // 1. Separa o texto em palavras (usando o espaço como divisor)
+                const words = text.split(' ');
+                
+                words.forEach((word, index) => {
+                    // 2. Cria um container para a PALAVRA inteira
+                    // white-space: nowrap impede que a palavra quebre dentro dela
+                    const wordContainer = document.createElement('span');
+                    wordContainer.style.whiteSpace = 'nowrap';
+                    wordContainer.style.display = 'inline-block'; 
+                    
+                    // 3. Cria as letras DENTRO desse container
+                    for (let char of word) {
+                        const span = document.createElement('span');
+                        span.className = 'hover-letter';
+                        span.textContent = char;
+                        wordContainer.appendChild(span);
+                    }
+                    
+                    // Adiciona a palavra protegida ao título
+                    element.appendChild(wordContainer);
+                    
+                    // 4. Adiciona o espaço de volta (se não for a última palavra)
+                    if (index < words.length - 1) {
+                        const space = document.createTextNode(' ');
+                        element.appendChild(space);
+                    }
+                });
+            });
+        }
+
+        // ============================================
+        // NAVBAR SCROLL
+        // ============================================
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // ============================================
+        // COUNTDOWN TIMER
+        // ============================================
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = CONFIG.camporiDate.getTime() - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(3, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            if (distance < 0) {
+                document.querySelector('.countdown-timer').innerHTML = '<p style="color: var(--accent-yellow); font-size: 1.5rem;">O Camporí começou!</p>';
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // ============================================
+        // PROGRESS & AVATARS
+        // ============================================
+        function initProgress() {
+            const porcentagem = (CONFIG.arrecadado / CONFIG.metaTotal) * 100;
+            const confirmados = Math.floor(CONFIG.arrecadado / CONFIG.custoPorDesbravador);
+
+            // Animar valor arrecadado
+            const arrecadadoEl = document.getElementById('arrecadado-display');
+            const barCurrentEl = document.getElementById('bar-current');
+            let current = 0;
+            const increment = CONFIG.arrecadado / 80;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= CONFIG.arrecadado) {
+                    current = CONFIG.arrecadado;
+                    clearInterval(timer);
+                }
+                const formatted = Math.floor(current).toLocaleString('pt-BR');
+                arrecadadoEl.textContent = `R$ ${formatted}`;
+                barCurrentEl.textContent = formatted;
+            }, 20);
+
+            document.getElementById('confirmados-display').textContent = confirmados;
+            document.getElementById('bar-percent').textContent = Math.round(porcentagem);
+
+            setTimeout(() => {
+                document.getElementById('progressBar').style.width = porcentagem + '%';
+            }, 500);
+
+            // Criar grid de avatares
+            const grid = document.getElementById('avatarsGrid');
+            grid.innerHTML = ''; // Limpar grid para evitar duplicação
+            for (let i = 0; i < CONFIG.totalDesbravadores; i++) {
+                const avatar = document.createElement('div');
+                avatar.className = 'avatar-item ' + (i < confirmados ? 'confirmed' : 'pending');
+                avatar.innerHTML = i < confirmados ? '✓' : '?';
+                avatar.title = i < confirmados ? 'Viagem garantida!' : 'Ainda precisa de ajuda';
+                grid.appendChild(avatar);
+            }
+        }
+
+        // ============================================
+        // FLOATING CARDS
+        // ============================================
+        function initFloatingCards() {
+            document.querySelectorAll('.tier-card').forEach((card, i) => {
+                card.style.animation = `float ${3 + i * 0.3}s ease-in-out infinite`;
+                card.style.animationDelay = `${i * 0.15}s`;
+            });
+
+            document.querySelectorAll('.badge-percent').forEach((badge, i) => {
+                badge.style.animation = `pulse 2s ease-in-out infinite`;
+                badge.style.animationDelay = `${i * 0.2}s`;
+            });
+        }
+
+        // ============================================
+        // SCROLL REVEAL
+        // ============================================
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.activity-card, .gallery-item, .stat-box').forEach((el, i) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = `all 0.6s ease ${i * 0.1}s`;
+                observer.observe(el);
+            });
+        }
+
+        // ============================================
+        // COPY PIX
+        // ============================================
+        function copyPix() {
+            navigator.clipboard.writeText(document.getElementById('pixKey').textContent).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copiado!';
+                btn.style.background = 'var(--accent-yellow)';
+                btn.style.color = 'var(--bg-black)';
+                setTimeout(() => {
+                    btn.textContent = 'Copiar Chave PIX';
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 2000);
+            });
+        }
+
+        // ============================================
+        // SMOOTH SCROLL
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Fechar menu mobile ao clicar em link
+                const navLinks = document.getElementById('navLinks');
+                const mobileBtn = document.getElementById('mobileMenuBtn');
+                if (navLinks && mobileBtn) {
+                    navLinks.classList.remove('active');
+                    mobileBtn.classList.remove('active');
+                }
+            });
+        });
+
+        // ============================================
+        // MOBILE MENU
+        // ============================================
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenuBtn.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // ============================================
+        // SLIDESHOW AUTOMÁTICO (CORRIGIDO)
+        // ============================================
+        
+        const SLIDES = {
+            acampamento: {
+                elementId: 'slide-acampamento',
+                path: 'pics/acamp/', 
+                // Coloque Apenas o nome do arquivo aqui. 
+                // Converta os HEIC para JPG!
+                images: ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 'foto6.jpg', 'foto7.jpg'] 
+            },
+            especialidades: {
+                elementId: 'slide-especialidades',
+                path: 'pics/espec/',
+                // Certifique-se que estas fotos estão na pasta pics/espec/
+                images: ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 'foto6.jpg', 'foto7.jpg', 'foto8.jpg',
+                            'foto9.jpg', 'foto10.jpg'
+                ]
+            },
+            comunitario: {
+                elementId: 'slide-comunitario',
+                path: 'pics/servico/',
+                // Certifique-se que estas fotos estão na pasta pics/servico/
+                images: ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 'foto6.jpg']
+            },
+            campori: {
+                elementId: 'slide-campori', // O ID que colocamos no HTML
+                path: 'pics/campori/',      // A pasta onde estarão as fotos
+                // Lembre-se de criar essa pasta e colocar as fotos .jpg lá!
+                images: ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 'foto6.jpg',
+                            'foto7.jpg'
+                ]
+            }
+        };
+
+       function startSlideshow() {
+            function cycleImages(categoryKey) {
+                const config = SLIDES[categoryKey];
+                const imgElement = document.getElementById(config.elementId);
+                
+                if (!imgElement) return;
+
+                // Garante que o pai tenha as propriedades corretas de fundo
+                const parentElement = imgElement.parentElement;
+                parentElement.style.backgroundPosition = 'center';
+                parentElement.style.backgroundSize = 'cover';
+                parentElement.style.backgroundRepeat = 'no-repeat';
+
+                let currentIndex = 0;
+
+                setInterval(() => {
+                    // 1. O TRUQUE: Define a imagem ATUAL como fundo do container pai
+                    // Assim, quando a tag <img> ficar transparente, o fundo mostra a mesma foto
+                    parentElement.style.backgroundImage = `url('${imgElement.src}')`;
+
+                    // 2. Faz a imagem da frente (tag img) desaparecer suavemente
+                    imgElement.classList.add('fade-out');
+
+                    // 3. Aguarda o tempo da transição (800ms)
+                    setTimeout(() => {
+                        // Calcula a próxima imagem
+                        currentIndex = (currentIndex + 1) % config.images.length;
+                        const nextImage = config.images[currentIndex];
+                        
+                        // Troca o src da imagem da frente (que está invisível agora)
+                        imgElement.src = config.path + nextImage;
+
+                        // Quando a nova imagem carregar, faz ela aparecer de novo
+                        // Como ela aparece POR CIMA do fundo (foto antiga), cria o efeito suave
+                        imgElement.onload = () => {
+                            imgElement.classList.remove('fade-out');
+                        };
+                        
+                        imgElement.onerror = () => {
+                             imgElement.classList.remove('fade-out');
+                             console.log("Erro ao carregar: " + config.path + nextImage);
+                        }
+                    }, 800); // Tempo sincronizado com o CSS
+
+                }, 4000); 
+            }
+
+            // Inicia os ciclos
+            cycleImages('acampamento');
+            setTimeout(() => cycleImages('especialidades'), 1500);
+            setTimeout(() => cycleImages('comunitario'), 3000);
+            setTimeout(() => cycleImages('campori'), 1000);
+        }
+        // Adicione 'startSlideshow()' na inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            wrapLetters();
+            initProgress();
+            initFloatingCards();
+            initScrollReveal();
+            startSlideshow(); // <--- ADICIONE ESTA LINHA AQUI
+        });
+
+        // ============================================
+        // RIPPLE ON CLICK
+        // ============================================
+        document.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;width:10px;height:10px;border-radius:50%;border:2px solid var(--primary-green);transform:translate(-50%,-50%);pointer-events:none;z-index:9998;animation:ripple 0.6s ease-out;`;
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+
+        // Ripple animation
+        const style = document.createElement('style');
+        style.textContent = `@keyframes ripple{0%{width:10px;height:10px;opacity:1}100%{width:80px;height:80px;opacity:0}}`;
+        document.head.appendChild(style);
+
+        // ============================================
+        // INIT (
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            wrapLetters();
+            initProgress();
+            initFloatingCards();
+            initScrollReveal();
+            startSlideshow(); // Inicia o slideshow
+        });
+    </script>
+</body>
+</html>
