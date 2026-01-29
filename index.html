@@ -1,3 +1,570 @@
+
+Padrinhos DBV
+/
+
+index.html
+html
+
+Seguinte, os quadradinhos que contam os desbravadores indo para o camporí estão duplicados.
+
+inverta os botões de doar agora e o de apadrinhe.
+
+Preciso substituir os botões de ação (href) dos cards de doação. Em vez de links internos, eles devem direcionar para o WhatsApp do diretor. Cada botão deve ter um parâmetro ?text= na URL contendo uma mensagem específica identificando qual cota (Amigo, Companheiro, Padrinho) o usuário escolheu, para que eu saiba o valor a ser cobrado quando a conversa iniciar.
+
+a e coloque também a opção de parcelamento (ex: 10x 200 reais)
+
+e otimize esse site para que também fique bom no mobile
+
+15:12
+Vou analisar o arquivo HTML para fazer as correções necessárias.
+
+
+Ver o conteúdo do arquivo HTML para identificar os problemas e fazer as correções
+Mostrar arquivo de trabalho
+Deixe-me ver mais do arquivo para encontrar todas as seções que preciso modificar:
+
+
+2 etapas
+
+Ver a seção dos cards de doação (tier cards)
+Mostrar arquivo de trabalho
+
+Ver o HTML dos cards de tier para encontrar os botões e a estrutura
+Mostrar arquivo de trabalho
+Agora vou ver a parte dos tier cards que foi truncada:
+
+
+Ver os tier cards completos
+Mostrar arquivo de trabalho
+Agora vou ver a seção do nav-cta para encontrar os botões que precisam ser invertidos:
+
+
+Ver a seção de navegação com os botões
+Mostrar arquivo de trabalho
+Agora tenho todas as informações necessárias. Vou ver o JavaScript que cria a grid de avatares para entender o problema da duplicação:
+
+
+Ver a função que cria os avatares para entender a duplicação
+Mostrar arquivo de trabalho
+
+Ver a inicialização para entender duplicação e o final do arquivo
+Mostrar arquivo de trabalho
+Agora preciso ver a navegação completa para encontrar onde estão os botões "Doar Agora" e "Apadrinhe":
+
+
+Ver a seção de navegação completa
+Mostrar arquivo de trabalho
+Agora tenho todas as informações necessárias. Preciso fazer as seguintes alterações:
+
+Corrigir duplicação dos avatares - Limpar o grid antes de adicionar
+Inverter botões nav - "Doar Agora" → "Apadrinhe" e vice-versa
+Atualizar links dos cards - Direcionar para WhatsApp com mensagens específicas
+Adicionar opção de parcelamento nos cards
+Otimizar para mobile
+Vou criar o arquivo corrigido:
+
+
+3 etapas
+Failed to edit
+Index
+
+Ver caracteres exatos do arquivo
+
+
+O arquivo tem terminações de linha Windows (CRLF). Vou converter:
+
+
+2 etapas
+
+Inverter os botões na navegação - trocar Doar Agora por Apadrinhe
++3
+-3
+index.html
+
+Trocar link do menu Apadrinhe para Doar
++2
+-2
+index.html
+Agora vou atualizar os cards de doação com links para WhatsApp e adicionar parcelamento. Preciso do número do WhatsApp do diretor - vou usar um placeholder que você pode substituir:
+
+
+3 etapas
+
+Atualizar card Padrinho com WhatsApp e parcelamento
++9
+-8
+index.html
+
+Atualizar card Super Padrinho com WhatsApp
++9
+-8
+index.html
+Agora vou adicionar o estilo para o texto de parcelamento e melhorar a responsividade mobile:
+
+
+Adicionar estilo para parcelamento e melhorar tier cards
++20
+-7
+index.html
+Agora vou adicionar os estilos responsivos para mobile. Primeiro, vou ver onde estão os media queries existentes:
+
+
+Encontrar media queries existentes
+
+
+
+Ver media queries existentes para entender estrutura
+Mostrar arquivo de trabalho
+Agora vou melhorar significativamente a responsividade mobile, incluindo menu hamburger e melhor layout para tiers:
+
+
+Melhorar responsividade mobile com menu hamburger e melhor layout
++191
+-40
+index.html
+Agora vou adicionar o botão do menu mobile no HTML e o JavaScript para funcionar:
+
+
+Adicionar botão do menu mobile na navegação
++19
+-14
+index.html
+Agora vou adicionar o JavaScript para o menu mobile:
+
+
+Ver onde adicionar o JS do menu mobile
+Mostrar arquivo de trabalho
+
+Adicionar JavaScript para menu mobile
++31
+-10
+index.html
+Agora vou copiar para a pasta de outputs e apresentar o arquivo:
+
+
+Copiar arquivo finalizado para outputs
+
+
+
+Presented file
+Pronto! Fiz todas as alterações solicitadas:
+
+Correções realizadas:
+
+Duplicação dos avatares corrigida - Adicionei grid.innerHTML = '' antes de criar os quadradinhos, garantindo que o grid seja limpo toda vez
+Botões invertidos - O botão destacado na nav agora é "Apadrinhe" (vai para #apadrinhe) e no menu tem "Doar Agora" (vai para #doar)
+Links para WhatsApp - Cada card agora abre o WhatsApp com uma mensagem personalizada identificando a cota escolhida:
+Amigo: "...cota AMIGO (R$ 500)..."
+Companheiro: "...cota COMPANHEIRO (R$ 1.000)..."
+Colaborador: "...cota COLABORADOR (R$ 1.500)..."
+Padrinho: "...cota PADRINHO (R$ 2.000)..."
+Super Padrinho: "...ser um SUPER PADRINHO..."
+Parcelamento adicionado em cada card:
+Amigo: 5x de R$ 100
+Companheiro: 10x de R$ 100
+Colaborador: 10x de R$ 150
+Padrinho: 10x de R$ 200
+Super Padrinho: "parcelamos para você!"
+Otimização mobile completa:
+Menu hamburger funcional para telas pequenas
+Cards de doação em coluna única no mobile
+Fontes e espaçamentos ajustados
+Countdown responsivo
+Grid de avatares adaptativo
+Breakpoints para 992px, 768px e 480px
+⚠️ IMPORTANTE: Você precisa substituir o número de WhatsApp placeholder 5561999999999 pelo número real do diretor em todos os 5 links dos cards de doação. Procure por "wa.me/5561999999999" no arquivo e substitua pelo número correto (formato: código do país + DDD + número, sem espaços ou caracteres especiais).
+
+Index
+Código · HTML 
+1º a parte dos 40 quadradinhos representando cada um, um desbravador, ficou muito ruim no celular, porque eles ficam muito grandes.
+
+2º a imagem pequena que fica no canto inferior direito da imagem do quem somos, fica de forma esquisita no celular, ela não fica mais sobreposta daquele jeito.
+
+3º no celular,  a data local e descriçaõ do campori ficam centralizados enquanto o titulo "camporí DSA 2027" fica no canto. tinha que ficar tudo no canto
+
+4º a parte dos padrinhos também ficou ruim no celular... porque ficaram todos 1 em cima do outro, aí tem que descer muito a tela.
+
+15:33
+Vou fazer essas correções. Deixa eu ver o código atual e ajustar:
+
+
+Ver os estilos responsivos atuais para corrigir
+Mostrar arquivo de trabalho
+
+Ver continuação dos estilos responsivos
+Mostrar arquivo de trabalho
+Agora vou ver os estilos do campori para entender como alinhar:
+
+
+Ver estilos da seção campori
+Mostrar arquivo de trabalho
+
+Ver estilos da seção campori - campori-details
+Mostrar arquivo de trabalho
+Agora vou fazer todas as correções nos media queries:
+
+
+Corrigir todos os problemas de responsividade mobile
++228
+-132
+index.html
+Agora vou copiar para outputs e apresentar:
+
+
+Copiar arquivo corrigido para outputs
+
+
+
+Presented file
+Pronto! Fiz todas as correções:
+
+1. Quadradinhos dos desbravadores:
+
+Agora ficam em grid de 10 colunas no mobile (768px) e 8 colunas em telas menores (480px)
+Tamanho menor com font-size: 0.7rem e gaps reduzidos
+Legenda fica em linha horizontal para economizar espaço
+2. Imagem secundária do "Quem Somos":
+
+Mantém o posicionamento sobreposto (position: absolute) também no mobile
+Tamanho reduzido para 120x120px (768px) e 100x100px (480px)
+Continua no canto inferior direito com a borda branca
+3. Seção do Camporí:
+
+Título, data, local e descrição agora ficam todos alinhados à esquerda no mobile
+A data e informações ficam lado a lado (em linha) em vez de empilhados
+Removido o centralização que estava causando a inconsistência
+4. Cards de padrinhos:
+
+Agora ficam em 2 colunas no mobile, não mais 1
+Cards bem mais compactos: padding reduzido, fontes menores
+Ícones, preços e descrições menores para caber bem
+Mantém a visualização limpa sem precisar rolar tanto
+Index
+Código · HTML 
+show!! perfeito, só mais 2 últimos ajustes.
+
+na galeria, momentos que marcam, deixe nas mesma cores do sobre nós.
+
+já coloque os caminhos das imagens para ficarem lá. elas não vão ficar alternando.
+
+outra coisa, o menu no celular, está meio bugado quando clica nele
+
+outra coisa, a parte do faça uma doação, deve ser um link para o whatsapp também. só que não com um valor pre definido.
+
+e arrume as cores dessa parte
+
+e mais uma coisa, adicione uma etapa de doar outro valor, no momento do apadrinhamento
+
+15:41
+Vou fazer todos esses ajustes. Deixa eu ver as seções que preciso modificar:
+
+
+Ver a seção da galeria
+Mostrar arquivo de trabalho
+
+Ver a seção donate completa
+Mostrar arquivo de trabalho
+Agora vou ver o HTML da galeria e da seção de doação:
+
+
+Ver HTML da galeria e donate
+Mostrar arquivo de trabalho
+
+Ver continuação dos tiers e galeria
+Mostrar arquivo de trabalho
+Agora vou fazer todas as alterações. Primeiro, vou atualizar os estilos da galeria para usar as mesmas cores do "Sobre Nós":
+
+
+Atualizar estilos da galeria para cores do Sobre Nós
++45
+-29
+index.html
+Agora vou atualizar os estilos da seção donate para cores mais elegantes:
+
+
+Atualizar estilos da seção donate com cores melhores
++123
+-58
+index.html
+Agora vou atualizar o HTML da galeria com os caminhos das imagens:
+
+
+Atualizar galeria com imagens reais
++17
+-17
+index.html
+Agora vou atualizar a seção donate com WhatsApp e remover o PIX:
+
+
+Atualizar seção donate com WhatsApp
++24
+-15
+index.html
+Agora vou adicionar o card "Outro Valor" na seção de apadrinhamento:
+
+
+Adicionar card Outro Valor na seção de apadrinhamento
++22
+-12
+index.html
+Agora vou adicionar os estilos para o novo card "Outro Valor":
+
+
+Adicionar estilos para o card Outro Valor
++30
+-4
+index.html
+Agora vou corrigir o menu mobile que está bugado. Deixa eu ver como está o código:
+
+
+Ver o JavaScript do menu mobile
+Mostrar arquivo de trabalho
+
+Ver onde está o código do menu mobile
+Mostrar arquivo de trabalho
+O JavaScript do menu parece OK. Vou verificar os estilos CSS do menu mobile e melhorá-los:
+
+
+Ver estilos do mobile menu
+Mostrar arquivo de trabalho
+Vou melhorar os estilos do menu mobile para funcionar melhor:
+
+
+Melhorar estilos do menu mobile
++58
+-34
+index.html
+Agora vou ajustar o grid dos tiers para ter 3 colunas em telas médias já que agora são 6 cards:
+
+
+Ajustar grid dos tiers para 6 cards
++26
+-26
+index.html
+Agora vou atualizar o grid base dos tiers para 6 colunas já que são 6 cards:
+
+
+2 etapas
+
+Ver onde está o estilo do tiers-grid (mais acima)
+Mostrar arquivo de trabalho
+
+Atualizar grid para 6 colunas
++7
+-7
+index.html
+Agora vou copiar para outputs e apresentar:
+
+
+Copiar arquivo finalizado para outputs
+
+
+
+Presented file
+Pronto! Todas as alterações foram feitas:
+
+1. Galeria "Momentos que marcam":
+
+Cores agora iguais ao "Sobre Nós" (fundo branco, título preto, label verde)
+Imagens com caminhos definidos: pics/galeria/foto1.jpg até foto5.jpg
+Sem slideshow, imagens fixas
+Bordas arredondadas e sombras suaves
+2. Menu mobile corrigido:
+
+Animação suave de abertura/fechamento com opacity e visibility
+Itens do menu aparecem com animação escalonada
+Z-index ajustado para funcionar corretamente
+Links maiores e mais fáceis de clicar
+3. Seção "Faça sua doação":
+
+Cores ajustadas (fundo escuro, tons elegantes)
+Agora tem botão de WhatsApp como principal com a mensagem: "Olá! Quero fazer uma doação para o Camporí DSA 2027..."
+PIX mantido como opção secundária
+Botões com estilo arredondado e ícone do WhatsApp
+4. Novo card "Outro Valor":
+
+Adicionado como 6º card na seção de apadrinhamento
+Borda tracejada verde para destacar que é diferente
+Badge "LIVRE" e preço "R$ ???"
+Mensagem de WhatsApp: "...contribuir com um VALOR PERSONALIZADO..."
+5. Grid dos padrinhos atualizado:
+
+Desktop: 6 colunas
+Tablet (992px): 3 colunas
+Mobile (768px): 2 colunas (mais compacto)
+⚠️ LEMBRETE: Substitua 5561999999999 pelo número real do WhatsApp do diretor em todos os links!
+
+📁 Crie a pasta pics/galeria/ e coloque as fotos foto1.jpg a foto5.jpg para a galeria funcionar.
+
+Index
+Código · HTML 
+ficou bem ruim assim. a questão do outro valor
+
+coloque ele embaixo dos outros porém grande
+
+15:48
+Vou ajustar para colocar o card "Outro Valor" embaixo dos outros, ocupando toda a largura:
+
+
+Atualizar grid para 5 colunas novamente e ajustar card Outro Valor para ficar embaixo
++7
+-7
+index.html
+
+Atualizar estilos do card Outro Valor para ocupar toda largura
++75
+-30
+index.html
+Agora vou atualizar o HTML do card "Outro Valor" para ter a estrutura correta:
+
+
+Atualizar HTML do card Outro Valor com nova estrutura
++12
+-12
+index.html
+Agora vou ajustar o media query de 992px para o tiers-grid voltar para 2 colunas:
+
+
+1 etapa
+
+Copiar arquivo finalizado para outputs
+
+
+
+Presented file
+Pronto! Agora o card "Outro Valor" está:
+
+Embaixo dos 5 cards principais, ocupando toda a largura
+Layout horizontal no desktop: ícone à esquerda, texto no meio, botão à direita
+Fundo com gradiente verde suave e borda tracejada para destacar
+Texto mais descritivo: "Quer contribuir com outro valor? Toda ajuda é bem-vinda..."
+Botão "Falar no WhatsApp"
+No mobile ele fica em coluna (vertical) e centralizado.
+
+Index
+Código · HTML 
+
+index.html
+html
+
+1º Tire a parada do faça via pix, não tem pix do clube.
+
+2º insira o email do clube para mim: gheroisaplac@gmail.com
+
+3º no celular, o quer contribuir com outro valor deve estar ao lado do super padrinho
+
+estou te mandando o arquivo atualizado
+
+16:22
+Vou fazer essas alterações no arquivo atualizado:
+
+
+2 etapas
+
+Encontrar seção donate
+
+
+
+Ver a seção donate
+Mostrar arquivo de trabalho
+Agora vou fazer as alterações:
+
+
+Remover PIX e manter só WhatsApp na seção donate
++17
+-24
+index.html
+
+Atualizar email no footer
++8
+-8
+index.html
+Agora vou ajustar o CSS para que no mobile o card "Outro Valor" fique ao lado do "Super Padrinho" em vez de ocupar toda a largura:
+
+
+Ver os estilos do card other-value
+Mostrar arquivo de trabalho
+
+Ver continuação dos estilos mobile
+Mostrar arquivo de trabalho
+Agora vou atualizar os estilos para que no mobile (768px) o card "Outro Valor" fique como um card normal ao lado do Super Padrinho:
+
+
+1 etapa
+
+Copiar arquivo finalizado para outputs
+
+
+
+Presented file
+Pronto! Alterações feitas:
+
+PIX removido - A seção "Faça sua doação" agora só tem o botão do WhatsApp
+Email atualizado - No footer agora aparece gheroisaplac@gmail.com
+Card "Outro Valor" no mobile - Agora no celular ele fica como um card normal (mesmo tamanho dos outros), aparecendo ao lado do "Super Padrinho" no grid de 2 colunas, em vez de ocupar a linha inteira
+Index
+Código · HTML 
+
+<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Grandes Heróis | Camporí DSA 2027</title> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="
+
+pasted
+
+tudo perfeito aqui, com excessão de 3 coisas, que o problema é só no celular...
+
+1º no celular, quando estamos scrollando e resolvemos apertar no menu, fica tudo bugado. ele funciona bem só quando vc aperta quando está no início da tela.
+
+2º logo que abrimos o site no celular, fica um espaço muito grande entre o cabeçalho e a caixa "camporí DSA 2027..."
+
+3º acho que pela tela ser muito extreita a disposição das opções de apadrinhamento esta ruim. a da esquerda fica muito pequena, eles não são distribuíudos igualmente
+
+17:40
+Vou corrigir esses 3 problemas no mobile. Deixa eu analisar e fazer as alterações:
+
+
+3 etapas
+
+Copiar para outputs
+
+
+
+Presented file
+Pronto! Fiz as 3 correções para mobile:
+
+1. Menu mobile corrigido:
+
+Agora usa position: fixed com width: 100% e height: 100% em vez de valores de viewport
+Adicionado pointer-events: none/auto para evitar conflitos de clique
+Adicionado body.menu-open { overflow: hidden } para travar o scroll quando o menu está aberto
+O botão do menu agora tem e.stopPropagation() para evitar propagação de eventos
+2. Espaço do hero reduzido:
+
+padding-top do hero reduzido de 100px para 70px no mobile
+Gaps entre elementos reduzidos (15px em vez de 30px)
+Badge e título com margens menores
+Imagem do hero menor (200px de altura)
+Countdown com menos margem (15px ao invés de 30px)
+3. Cards de apadrinhamento em 3 colunas iguais:
+
+No mobile (768px): grid de 3 colunas iguais (repeat(3, 1fr))
+Todos os cards têm o mesmo tamanho, incluindo o "Outro Valor"
+Em telas muito pequenas (480px): volta para 2 colunas para melhor legibilidade
+Cards mais compactos com padding e fontes menores
+Agora o menu deve funcionar em qualquer posição de scroll, o hero fica mais compacto, e os 6 cards de apadrinhamento ficam distribuídos igualmente em 3 colunas no celular!
+
+Index
+Código · HTML 
+
+
+Você atingiu seu limite de sessão ∙ Reinicia às 20:00
+Continue trabalhando
+
+
+
+
+Claude é uma IA e pode cometer erros. Por favor, verifique as respostas.
+Index · HTML
+Copiar
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -39,6 +606,11 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+        
+        /* Quando menu mobile está aberto, trava o scroll do body */
+        body.menu-open {
+            overflow: hidden;
         }
 
         .container {
@@ -146,13 +718,13 @@
         .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* Empilha o Wrapper e o Contador */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             background: var(--bg-black);
             position: relative;
             overflow: hidden;
-            padding-top: 100px; /* Espaço para o menu fixo não cobrir */
+            padding-top: 100px;
         }
 
         .hero::before {
@@ -227,13 +799,12 @@
             line-height: 1.8;
         }
 
-        /* Configuração da Imagem */
         .hero-image {
             position: relative;
             overflow: hidden;
-            height: 400px; /* Altura fixa para manter o estilo panorâmico */
+            height: 400px;
             width: 100%;
-            border-radius: 20px 0 0 20px; /* Arredondado na esquerda */
+            border-radius: 20px 0 0 20px;
             box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
 
@@ -243,7 +814,6 @@
             object-fit: cover;
         }
 
-        /* Configuração do Contador (agora centralizado embaixo) */
         .hero-countdown {
             background: rgba(18, 18, 18, 0.8);
             border: 2px solid var(--primary-green);
@@ -251,9 +821,8 @@
             max-width: 600px;
             box-shadow: 0 0 30px rgba(76, 175, 80, 0.2);
             z-index: 2;
-            width: 90%; /* Para não colar na borda em celular */
+            width: 90%;
             border-radius: 10px;
-            /* Centraliza o próprio box */
             margin: 0 auto 40px auto; 
         }
 
@@ -296,30 +865,37 @@
             margin-top: 5px;
         }
 
-        /* Ajuste Responsivo para Mobile */
         @media (max-width: 992px) {
             .hero {
-                padding-top: 120px;
-                display: block; /* Remove o flex center vertical */
+                padding-top: 80px;
+                min-height: auto;
+                justify-content: flex-start;
             }
             .hero-wrapper {
-                grid-template-columns: 1fr; /* Um embaixo do outro */
+                grid-template-columns: 1fr;
                 padding: 0 20px;
-                gap: 30px;
+                gap: 20px;
+                margin-bottom: 20px;
             }
             .hero-content {
                 text-align: center;
                 align-items: center;
             }
+            .hero-badge {
+                margin-bottom: 15px;
+            }
+            .hero h1 {
+                margin-bottom: 15px;
+            }
             .hero-description {
-                margin: 0 auto; /* Centraliza texto */
+                margin: 0 auto;
             }
             .hero-image {
-                border-radius: 10px; /* Borda normal no mobile */
-                height: 300px;
+                border-radius: 10px;
+                height: 250px;
             }
             .hero-countdown {
-                margin: 30px auto;
+                margin: 20px auto 30px;
             }
         }
 
@@ -420,7 +996,6 @@
             margin-top: 10px;
         }
 
-        /* Progress Bar */
         .progress-bar-container {
             margin-bottom: 50px;
         }
@@ -475,7 +1050,6 @@
             100% { transform: translateX(100%); }
         }
 
-        /* Avatars Grid */
         .avatars-section {
             text-align: center;
         }
@@ -606,33 +1180,27 @@
         .about-image {
             position: relative;
             width: 100%;
-            /* Garante que o elemento decorativo fique atrás */
             z-index: 1; 
         }
 
-        /* NOVO: Elemento decorativo verde atrás das fotos */
         .about-image::before {
             content: '';
             position: absolute;
-            top: -20px;     /* Desloca um pouco para cima */
-            left: -20px;    /* Desloca um pouco para a esquerda */
-            width: 90%;     /* Não ocupa a largura total para dar um charme */
+            top: -20px;
+            left: -20px;
+            width: 90%;
             height: 90%;
-            background: var(--primary-green); /* Cor do tema */
-            opacity: 0.15;  /* Bem clarinho para não brigar com a foto */
+            background: var(--primary-green);
+            opacity: 0.15;
             border-radius: 15px;
-            z-index: -1;    /* Fica atrás de tudo */
+            z-index: -1;
         }
 
         .about-image-main {
             width: 100%;
             aspect-ratio: 4/5;
-            /* background: var(--bg-card); <-- REMOVIDO (não precisa mais) */
-            border-radius: 15px; /* Aumentei um pouco o arredondado */
+            border-radius: 15px;
             overflow: hidden;
-            /* border: 1px solid rgba(0,0,0,0.1); <-- REMOVIDO A BORDA! */
-            
-            /* NOVO: Sombra suave para destacar do fundo branco */
             box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
         }
 
@@ -644,23 +1212,19 @@
             height: 180px;
             border-radius: 15px;
             overflow: hidden;
-            /* Borda branca grossa para separar da imagem de trás */
             border: 5px solid var(--white); 
-            /* Sombra mais forte para parecer que está flutuando na frente */
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             z-index: 2;
         }
 
-        /* Classe para as fotos reais preencherem o espaço */
         .img-full {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease; /* Prepara para um efeito hover suave */
+            transition: transform 0.5s ease;
         }
 
-        /* Efeito extra: leve zoom ao passar o mouse na imagem principal */
         .about-image-main:hover .img-full {
             transform: scale(1.05);
         }
@@ -715,13 +1279,6 @@
             gap: 15px;
             width: 100%;
             height: 100%;
-        }
-
-        .img-full {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
         }
 
         .image-placeholder svg {
@@ -783,22 +1340,20 @@
         /* ========== ACTIVITIES SECTION  ========== */
         .activities {
             background: var(--cream);
-            /* REMOVIDO: border-top: 1px solid var(--border-color); */
-            border-top: none; /* Remove a linha preta */
+            border-top: none;
             position: relative;
         }
 
-        /* AJUSTE DE CORES DO CABEÇALHO (Para fundo claro) */
         .activities .section-title {
-            color: var(--bg-black); /* Título preto para contraste */
+            color: var(--bg-black);
         }
 
         .activities .section-subtitle {
-            color: var(--dark-gray); /* Subtítulo cinza escuro */
+            color: var(--dark-gray);
         }
 
         .activities .section-label {
-            color: var(--primary-green); /* Verde fica melhor que amarelo no fundo creme */
+            color: var(--primary-green);
         }
 
         .activities-grid {
@@ -808,9 +1363,9 @@
         }
 
         .activity-card {
-            background: var(--white); /* Mudei os cards para BRANCO para ficar mais limpo */
-            border: 1px solid rgba(0,0,0,0.05); /* Borda super sutil */
-            border-radius: 15px; /* Arredondado para combinar com o resto */
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 15px;
             overflow: hidden;
             transition: all 0.4s ease;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
@@ -826,12 +1381,8 @@
             width: 100%;
             aspect-ratio: 16/10;
             background: var(--bg-card);
-            
-            /* CORREÇÃO: Adicionamos isso para o fundo não 'vazar' */
             position: relative;
             overflow: hidden; 
-            /* Arredonda apenas em cima (pois o card é arredondado) */
-            /* Isso garante que a imagem de fundo respeite a curva */
             border-radius: 15px 15px 0 0; 
         }
 
@@ -839,18 +1390,17 @@
             padding: 30px;
         }
 
-        /* Ajuste de cor dos textos DENTRO dos cards (agora que o card é branco) */
         .activity-content h3 {
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 10px;
-            color: var(--bg-black); /* Título do card preto */
+            color: var(--bg-black);
         }
 
         .activity-content p {
-            color: var(--dark-gray); /* Texto do card cinza escuro */
+            color: var(--dark-gray);
             font-size: 0.95rem;
-            text-align: justify; /* Mantendo seu padrão justificado */
+            text-align: justify;
             hyphens: none;
         }
 
@@ -858,12 +1408,11 @@
         .slider-img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Garante que a foto cubra tudo sem distorcer */
-            transition: opacity 0.8s ease-in-out; /* Tempo do "fade" */
+            object-fit: cover;
+            transition: opacity 0.8s ease-in-out;
             opacity: 1;
         }
 
-        /* Classe que o Javascript vai usar para esconder a imagem durante a troca */
         .slider-img.fade-out {
             opacity: 0;
         }
@@ -945,18 +1494,17 @@
             font-weight: 600;
         }
 
-        /* ========== CAMPORI IMAGES (ESTILO NOVO) ========== */
+        /* ========== CAMPORI IMAGES ========== */
         .campori-image {
             position: relative;
-            z-index: 1; /* Garante que a decoração fique atrás */
+            z-index: 1;
         }
 
-        /* O elemento verde decorativo atrás da foto */
         .campori-image::before {
             content: '';
             position: absolute;
             top: -20px;
-            right: -20px;   /* Deslocado para a direita para equilibrar */
+            right: -20px;
             width: 90%;
             height: 90%;
             background: var(--primary-green);
@@ -968,14 +1516,11 @@
         .campori-image-main {
             width: 100%;
             aspect-ratio: 3/4;
-            /* Removemos background e bordas antigas */
             border-radius: 15px;
             overflow: hidden;
-            /* Sombra para destacar do fundo preto */
             box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
         }
 
-        /* O selo com o número de desbravadores */
         .campori-image-badge {
             position: absolute;
             bottom: 30px;
@@ -983,12 +1528,7 @@
             background: var(--primary-green);
             padding: 25px 35px;
             border-radius: 15px;
-            
-            /* Sombra para dar profundidade */
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            
-            /* TRUQUE: Borda da mesma cor do fundo da seção (preto) 
-               para parecer que o selo está "recortado" da foto */
             border: 5px solid var(--bg-black); 
             z-index: 2;
         }
@@ -1272,39 +1812,6 @@
             }
         }
 
-        /* No mobile, other-value vira card normal ao lado do super padrinho */
-        @media (max-width: 768px) {
-            .tier-card.other-value {
-                grid-column: auto;
-                padding: 20px 15px;
-                gap: 10px;
-                background: var(--bg-black);
-            }
-            
-            .tier-card.other-value .tier-icon {
-                font-size: 2rem;
-            }
-            
-            .tier-card.other-value .tier-name {
-                font-size: 1.1rem;
-            }
-            
-            .tier-card.other-value .tier-desc {
-                font-size: 0.8rem;
-                line-height: 1.4;
-            }
-            
-            .tier-card.other-value .btn-tier {
-                padding: 10px 20px;
-                font-size: 0.75rem;
-            }
-            
-            .tier-card.other-value .badge-percent {
-                font-size: 0.65rem;
-                padding: 4px 8px;
-            }
-        }
-
         /* ========== GALLERY SECTION ========== */
         .gallery {
             background: var(--white);
@@ -1355,7 +1862,7 @@
         .find-club-wrapper {
             margin-top: 35px;
             padding-top: 20px;
-            border-top: 1px solid rgba(0,0,0,0.1); /* Linha divisória suave */
+            border-top: 1px solid rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             gap: 15px;
@@ -1378,15 +1885,15 @@
             text-decoration: none;
             font-size: 0.95rem;
             transition: all 0.3s ease;
-            background: rgba(76, 175, 80, 0.1); /* Fundo verde bem clarinho */
+            background: rgba(76, 175, 80, 0.1);
             padding: 10px 20px;
-            border-radius: 50px; /* Botão arredondado */
+            border-radius: 50px;
         }
 
         .btn-find-club:hover {
             background: var(--primary-green);
             color: white;
-            transform: translateX(5px); /* Move levemente para direita ao passar o mouse */
+            transform: translateX(5px);
             box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
         }
 
@@ -1459,59 +1966,6 @@
 
         .btn-whatsapp-donate i {
             font-size: 1.3rem;
-        }
-
-        .pix-box {
-            background: var(--bg-card);
-            padding: 50px;
-            margin-top: 40px;
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-        }
-
-        .pix-box h3 {
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            color: var(--text-main);
-        }
-
-        .pix-key {
-            background: var(--bg-black);
-            padding: 20px 40px;
-            font-family: monospace;
-            font-size: 1.2rem;
-            color: var(--primary-green);
-            margin-bottom: 15px;
-            display: inline-block;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            user-select: all;
-        }
-
-        .pix-name {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .copy-btn {
-            background: transparent;
-            color: var(--primary-green);
-            border: 2px solid var(--primary-green);
-            padding: 15px 40px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            margin-top: 25px;
-            border-radius: 50px;
-            transition: all 0.3s;
-        }
-
-        .copy-btn:hover {
-            background: var(--primary-green);
-            color: white;
-            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.4);
         }
 
         /* ========== FOOTER ========== */
@@ -1612,7 +2066,7 @@
             gap: 5px;
             cursor: pointer;
             padding: 10px;
-            z-index: 1001;
+            z-index: 1003;
         }
         
         .mobile-menu-btn span {
@@ -1663,33 +2117,35 @@
         }
 
         @media (max-width: 768px) {
-            /* Mobile Navigation */
+            /* Mobile Navigation - CORRIGIDO */
             .mobile-menu-btn { 
                 display: flex;
                 position: relative;
-                z-index: 1002;
+                z-index: 1003;
             }
             
             .nav-links {
                 position: fixed;
                 top: 0;
                 left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(5, 5, 5, 0.98);
+                width: 100%;
+                height: 100%;
+                background: var(--bg-black);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 30px;
-                z-index: 1001;
+                z-index: 1002;
                 opacity: 0;
                 visibility: hidden;
-                transition: all 0.3s ease;
+                pointer-events: none;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
             }
             
             .nav-links.active {
                 opacity: 1;
                 visibility: visible;
+                pointer-events: auto;
             }
             
             .nav-links li {
@@ -1722,60 +2178,134 @@
                 font-size: 0.75rem;
             }
             
-            /* Hero adjustments */
+            /* Hero - menos espaço no topo */
+            .hero {
+                padding-top: 70px;
+                min-height: auto;
+            }
             .hero h1 { font-size: 1.8rem; }
             .hero-description { font-size: 1rem; }
-            .hero-wrapper { padding: 0 15px; }
-            .hero-image { height: 250px; }
+            .hero-wrapper { 
+                padding: 0 15px;
+                gap: 15px;
+                margin-bottom: 15px;
+            }
+            .hero-badge {
+                padding: 8px 15px;
+                margin-bottom: 10px;
+            }
+            .hero-badge span {
+                font-size: 0.7rem;
+            }
+            .hero h1 {
+                margin-bottom: 10px;
+            }
+            .hero-image { height: 200px; }
             
             /* Countdown */
             .countdown-timer { flex-wrap: wrap; gap: 10px; }
             .countdown-item { min-width: 60px; padding: 10px 8px; }
             .countdown-number { font-size: 1.8rem; }
-            .hero-countdown { padding: 15px 20px; }
+            .hero-countdown { 
+                padding: 15px 20px;
+                margin: 15px auto 20px;
+            }
             
-            /* Tiers - 2 colunas compactas no mobile */
+            /* Tiers - 3 colunas iguais no mobile */
             .tiers-grid { 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 12px;
+                grid-template-columns: repeat(3, 1fr); 
+                gap: 8px;
                 max-width: 100%;
             }
             .tier-card {
-                padding: 20px 15px;
+                padding: 12px 8px;
             }
             .tier-card.featured {
                 transform: none;
             }
             .tier-desc {
                 min-height: auto;
-                font-size: 0.8rem;
-                line-height: 1.4;
-                margin-bottom: 15px;
+                font-size: 0.65rem;
+                line-height: 1.3;
+                margin-bottom: 10px;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
             }
             .tier-price {
-                font-size: 1.5rem;
-                margin: 10px 0;
+                font-size: 1.1rem;
+                margin: 8px 0;
+            }
+            .tier-price small {
+                font-size: 0.5em;
             }
             .tier-icon {
-                font-size: 2rem;
-                margin-bottom: 10px;
+                font-size: 1.5rem;
+                margin-bottom: 8px;
             }
             .tier-name {
-                font-size: 1.1rem;
+                font-size: 0.85rem;
             }
             .tier-installment {
-                font-size: 0.75rem;
-                margin: -3px 0 10px 0;
+                font-size: 0.6rem;
+                margin: -3px 0 8px 0;
             }
             .btn-tier {
-                padding: 10px 20px;
-                font-size: 0.75rem;
+                padding: 8px 12px;
+                font-size: 0.6rem;
             }
             .badge-percent {
+                font-size: 0.55rem;
+                padding: 3px 6px;
+                top: 8px;
+                right: 8px;
+            }
+            
+            /* Card Outro Valor no mobile - mesmo tamanho que os outros */
+            .tier-card.other-value {
+                grid-column: auto;
+                flex-direction: column;
+                padding: 12px 8px;
+                gap: 8px;
+                background: var(--bg-black);
+                text-align: center;
+            }
+            
+            .tier-card.other-value .tier-icon {
+                font-size: 1.5rem;
+            }
+            
+            .tier-card.other-value .other-value-content {
+                align-items: center;
+                text-align: center;
+            }
+            
+            .tier-card.other-value .tier-name {
+                font-size: 0.85rem;
+            }
+            
+            .tier-card.other-value .tier-desc {
                 font-size: 0.65rem;
-                padding: 4px 8px;
-                top: 10px;
-                right: 10px;
+                line-height: 1.3;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            
+            .tier-card.other-value .btn-tier {
+                padding: 8px 12px;
+                font-size: 0.6rem;
+            }
+            
+            .tier-card.other-value .badge-percent {
+                font-size: 0.55rem;
+                padding: 3px 6px;
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                margin-bottom: 0;
             }
             
             /* Activities */
@@ -1789,7 +2319,7 @@
             .stat-value { font-size: 2rem; }
             .stat-box { padding: 20px; }
             
-            /* About - imagem secundária sobreposta também no mobile */
+            /* About */
             .about-image-secondary { 
                 position: absolute; 
                 bottom: -20px; 
@@ -1800,7 +2330,7 @@
                 border: 4px solid var(--white);
             }
             
-            /* Avatars - grid compacto com quadradinhos menores */
+            /* Avatars */
             .avatars-grid { 
                 grid-template-columns: repeat(10, 1fr); 
                 gap: 5px;
@@ -1820,7 +2350,7 @@
             .section-title { font-size: 1.8rem; }
             .section-header { margin-bottom: 40px; }
             
-            /* Campori section - tudo alinhado à esquerda */
+            /* Campori section */
             .campori-details {
                 text-align: left;
             }
@@ -1851,7 +2381,7 @@
             }
             .budget-list { font-size: 0.9rem; }
             
-            /* Campori image badge no mobile */
+            /* Campori image badge */
             .campori-image-badge {
                 left: -15px;
                 bottom: 20px;
@@ -1864,25 +2394,17 @@
                 font-size: 0.7rem;
             }
             
-            /* PIX box */
-            .pix-box { padding: 30px 20px; }
-            .pix-key { 
-                padding: 15px 20px; 
-                font-size: 0.9rem;
-                word-break: break-all;
-            }
-            
             /* Progress section */
             .progress-header h2 { font-size: 1.8rem; }
         }
         
         @media (max-width: 480px) {
             .hero h1 { font-size: 1.5rem; }
-            .hero-badge span { font-size: 0.7rem; }
+            .hero-badge span { font-size: 0.65rem; }
             .countdown-item { min-width: 55px; }
             .countdown-number { font-size: 1.5rem; }
             
-            /* Avatars ainda mais compactos */
+            /* Avatars */
             .avatars-grid { 
                 grid-template-columns: repeat(8, 1fr); 
                 gap: 4px;
@@ -1892,15 +2414,21 @@
                 border-radius: 3px;
             }
             
-            /* Tiers ainda em 2 colunas mas mais compactos */
-            .tier-card {
-                padding: 15px 12px;
+            /* Tiers - 2 colunas em telas muito pequenas */
+            .tiers-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
             }
-            .tier-price { font-size: 1.3rem; }
-            .tier-icon { font-size: 1.8rem; }
-            .tier-name { font-size: 1rem; }
-            .tier-desc { font-size: 0.75rem; }
-            .btn-tier { padding: 8px 15px; font-size: 0.7rem; }
+            .tier-card {
+                padding: 10px 6px;
+            }
+            .tier-price { font-size: 1rem; }
+            .tier-icon { font-size: 1.3rem; }
+            .tier-name { font-size: 0.75rem; }
+            .tier-desc { font-size: 0.6rem; }
+            .btn-tier { padding: 6px 10px; font-size: 0.55rem; }
+            .badge-percent { font-size: 0.5rem; padding: 2px 5px; }
+            .tier-installment { font-size: 0.55rem; }
             
             .section-title { font-size: 1.5rem; }
             .nav-logo span { font-size: 1rem; }
@@ -1915,16 +2443,13 @@
             }
         }
 
-        .hero-description,      /* Texto do Hero */
-        .about-text,            /* Texto do Sobre */
-        .section-subtitle,      /* Subtítulos das seções */
-        .activity-content p,    /* Texto dos cards de atividade */
-        .tier-desc,             /* Descrição dos níveis de apadrinhamento */
-        .footer-brand p {       /* Texto do rodapé */
+        .hero-description,
+        .about-text,
+        .section-subtitle,
+        .activity-content p,
+        .tier-desc,
+        .footer-brand p {
             text-align: justify;
-            
-            /* Dica extra: hifens automáticos ajudam a evitar 
-               buracos grandes entre as palavras quando se usa justify */
             hyphens: none;
             -webkit-hyphens: none; 
             -ms-hyphens: none;
@@ -2266,13 +2791,13 @@
                 </div>
 
                 <div class="tier-card other-value">
+                    <div class="badge-percent">LIVRE</div>
                     <span class="tier-icon">💝</span>
                     <div class="other-value-content">
-                        <div class="badge-percent">LIVRE</div>
-                        <h3 class="tier-name">Quer contribuir com outro valor?</h3>
-                        <p class="tier-desc">Toda ajuda é bem-vinda! Contribua com o valor que puder e faça parte dessa corrente de solidariedade. Entre em contato conosco pelo WhatsApp.</p>
+                        <h3 class="tier-name">Outro Valor</h3>
+                        <p class="tier-desc">Contribua com o valor que puder. Toda ajuda faz a diferença!</p>
                     </div>
-                    <a href="https://wa.me/5561999933816?text=Ol%C3%A1!%20Quero%20contribuir%20com%20o%20sonho%20do%20Campor%C3%AD.%20Como%20fa%C3%A7o%20minha%20doa%C3%A7%C3%A3o?" target="_blank" class="btn-tier">Falar no WhatsApp</a>
+                    <a href="https://wa.me/5561999933816?text=Ol%C3%A1!%20Quero%20contribuir%20com%20o%20sonho%20do%20Campor%C3%AD.%20Como%20fa%C3%A7o%20minha%20doa%C3%A7%C3%A3o?" target="_blank" class="btn-tier">WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -2351,7 +2876,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // ============================================
         // CONFIGURAÇÕES EDITÁVEIS
         // ============================================
@@ -2393,7 +2918,6 @@
         function animateTrail() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Limpar trilha gradualmente quando mouse para
             if (Date.now() - lastMouseMove > 200 && trail.length > 0) {
                 trail.shift();
             }
@@ -2427,20 +2951,16 @@
         // ============================================
         function wrapLetters() {
             document.querySelectorAll('.hover-text').forEach(element => {
-                const text = element.textContent; // Pega o texto original
-                element.innerHTML = ''; // Limpa o elemento
+                const text = element.textContent;
+                element.innerHTML = '';
                 
-                // 1. Separa o texto em palavras (usando o espaço como divisor)
                 const words = text.split(' ');
                 
                 words.forEach((word, index) => {
-                    // 2. Cria um container para a PALAVRA inteira
-                    // white-space: nowrap impede que a palavra quebre dentro dela
                     const wordContainer = document.createElement('span');
                     wordContainer.style.whiteSpace = 'nowrap';
                     wordContainer.style.display = 'inline-block'; 
                     
-                    // 3. Cria as letras DENTRO desse container
                     for (let char of word) {
                         const span = document.createElement('span');
                         span.className = 'hover-letter';
@@ -2448,10 +2968,8 @@
                         wordContainer.appendChild(span);
                     }
                     
-                    // Adiciona a palavra protegida ao título
                     element.appendChild(wordContainer);
                     
-                    // 4. Adiciona o espaço de volta (se não for a última palavra)
                     if (index < words.length - 1) {
                         const space = document.createTextNode(' ');
                         element.appendChild(space);
@@ -2499,7 +3017,6 @@
             const porcentagem = (CONFIG.arrecadado / CONFIG.metaTotal) * 100;
             const confirmados = Math.floor(CONFIG.arrecadado / CONFIG.custoPorDesbravador);
 
-            // Animar valor arrecadado
             const arrecadadoEl = document.getElementById('arrecadado-display');
             const barCurrentEl = document.getElementById('bar-current');
             let current = 0;
@@ -2523,9 +3040,8 @@
                 document.getElementById('progressBar').style.width = porcentagem + '%';
             }, 500);
 
-            // Criar grid de avatares
             const grid = document.getElementById('avatarsGrid');
-            grid.innerHTML = ''; // Limpar grid para evitar duplicação
+            grid.innerHTML = '';
             for (let i = 0; i < CONFIG.totalDesbravadores; i++) {
                 const avatar = document.createElement('div');
                 avatar.className = 'avatar-item ' + (i < confirmados ? 'confirmed' : 'pending');
@@ -2572,23 +3088,6 @@
         }
 
         // ============================================
-        // COPY PIX
-        // ============================================
-        function copyPix() {
-            navigator.clipboard.writeText(document.getElementById('pixKey').textContent).then(() => {
-                const btn = document.querySelector('.copy-btn');
-                btn.textContent = 'Copiado!';
-                btn.style.background = 'var(--accent-yellow)';
-                btn.style.color = 'var(--bg-black)';
-                setTimeout(() => {
-                    btn.textContent = 'Copiar Chave PIX';
-                    btn.style.background = '';
-                    btn.style.color = '';
-                }, 2000);
-            });
-        }
-
-        // ============================================
         // SMOOTH SCROLL
         // ============================================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2603,39 +3102,41 @@
                 if (navLinks && mobileBtn) {
                     navLinks.classList.remove('active');
                     mobileBtn.classList.remove('active');
+                    document.body.classList.remove('menu-open');
                 }
             });
         });
 
         // ============================================
-        // MOBILE MENU
+        // MOBILE MENU - CORRIGIDO
         // ============================================
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
         
         if (mobileMenuBtn && navLinks) {
-            mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
                 mobileMenuBtn.classList.toggle('active');
                 navLinks.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
             });
         }
 
         // ============================================
-        // SLIDESHOW AUTOMÁTICO (CORRIGIDO)
+        // SLIDESHOW AUTOMÁTICO
         // ============================================
         
         const SLIDES = {
             acampamento: {
                 elementId: 'slide-acampamento',
                 path: 'pics/acamp/', 
-                // Coloque Apenas o nome do arquivo aqui. 
-                // Converta os HEIC para JPG!
                 images: ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 'foto6.jpg', 'foto7.jpeg'] 
             },
             especialidades: {
                 elementId: 'slide-especialidades',
                 path: 'pics/espec/',
-                // Certifique-se que estas fotos estão na pasta pics/espec/
                 images: ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 'foto6.jpg', 'foto7.jpg', 'foto8.jpg',
                             'foto9.jpeg', 'foto10.jpeg'
                 ]
@@ -2643,13 +3144,11 @@
             comunitario: {
                 elementId: 'slide-comunitario',
                 path: 'pics/servico/',
-                // Certifique-se que estas fotos estão na pasta pics/servico/
                 images: ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.JPG', 'foto5.JPG', 'foto6.jpg']
             },
             campori: {
-                elementId: 'slide-campori', // O ID que colocamos no HTML
-                path: 'pics/campori/',      // A pasta onde estarão as fotos
-                // Lembre-se de criar essa pasta e colocar as fotos .jpg lá!
+                elementId: 'slide-campori',
+                path: 'pics/campori/',
                 images: ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 'foto6.jpg',
                             'foto7.jpg'
                 ]
@@ -2663,7 +3162,6 @@
                 
                 if (!imgElement) return;
 
-                // Garante que o pai tenha as propriedades corretas de fundo
                 const parentElement = imgElement.parentElement;
                 parentElement.style.backgroundPosition = 'center';
                 parentElement.style.backgroundSize = 'cover';
@@ -2672,24 +3170,16 @@
                 let currentIndex = 0;
 
                 setInterval(() => {
-                    // 1. O TRUQUE: Define a imagem ATUAL como fundo do container pai
-                    // Assim, quando a tag <img> ficar transparente, o fundo mostra a mesma foto
                     parentElement.style.backgroundImage = `url('${imgElement.src}')`;
 
-                    // 2. Faz a imagem da frente (tag img) desaparecer suavemente
                     imgElement.classList.add('fade-out');
 
-                    // 3. Aguarda o tempo da transição (800ms)
                     setTimeout(() => {
-                        // Calcula a próxima imagem
                         currentIndex = (currentIndex + 1) % config.images.length;
                         const nextImage = config.images[currentIndex];
                         
-                        // Troca o src da imagem da frente (que está invisível agora)
                         imgElement.src = config.path + nextImage;
 
-                        // Quando a nova imagem carregar, faz ela aparecer de novo
-                        // Como ela aparece POR CIMA do fundo (foto antiga), cria o efeito suave
                         imgElement.onload = () => {
                             imgElement.classList.remove('fade-out');
                         };
@@ -2698,25 +3188,16 @@
                              imgElement.classList.remove('fade-out');
                              console.log("Erro ao carregar: " + config.path + nextImage);
                         }
-                    }, 800); // Tempo sincronizado com o CSS
+                    }, 800);
 
                 }, 4000); 
             }
 
-            // Inicia os ciclos
             cycleImages('acampamento');
             setTimeout(() => cycleImages('especialidades'), 1500);
             setTimeout(() => cycleImages('comunitario'), 3000);
             setTimeout(() => cycleImages('campori'), 1000);
         }
-        // Adicione 'startSlideshow()' na inicialização
-        document.addEventListener('DOMContentLoaded', () => {
-            wrapLetters();
-            initProgress();
-            initFloatingCards();
-            initScrollReveal();
-            startSlideshow(); // <--- ADICIONE ESTA LINHA AQUI
-        });
 
         // ============================================
         // RIPPLE ON CLICK
@@ -2728,23 +3209,21 @@
             setTimeout(() => ripple.remove(), 600);
         });
 
-        // Ripple animation
         const style = document.createElement('style');
         style.textContent = `@keyframes ripple{0%{width:10px;height:10px;opacity:1}100%{width:80px;height:80px;opacity:0}}`;
         document.head.appendChild(style);
 
         // ============================================
-        // INIT (
+        // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', () => {
             wrapLetters();
             initProgress();
             initFloatingCards();
             initScrollReveal();
-            startSlideshow(); // Inicia o slideshow
+            startSlideshow();
         });
     </script>
 </body>
 
 </html>
-
